@@ -13,6 +13,14 @@ import net.minecraft.item.ItemStack;
 public class AdvThaumApi {
 	
 	private static final String wandpath = "thaumcraft.common.items.wands.ItemWandCasting";
+	/**
+	 * Allowing to draw vis from the wand
+	 * @param wand ItemStack of the wand to draw
+	 * @param player Player that hold the wand, for armor discount
+	 * @param aspects Aspects to be consumed
+	 * @param consume Consume aspect of not. If false method will just run a check can aspects be consumed
+	 * @return true if consume/can consume, false if not
+	 */
 	public static boolean drawVis(ItemStack wand, EntityPlayer player, AspectList aspects, boolean consume)
 	{
 		Class wandclass = null;
@@ -50,6 +58,11 @@ public class AdvThaumApi {
 		return false;
 	}
 	
+	/**
+	 * Used for getting foci from wand
+	 * @param wand
+	 * @return ItemStack of the foci
+	 */
 	public static ItemStack getFocusStack(ItemStack wand)
 	{
 		Class wandclass = null;
@@ -79,7 +92,11 @@ public class AdvThaumApi {
 			return null;
 		}
 	}
-	
+	/**
+	 * Allowing to get item of the foci. I don't know for what
+	 * @param wand
+	 * @return Item of the foci
+	 */
 	public static ItemFocusBasic getFoci(ItemStack wand)
 	{
 		Class wandclass = null;
@@ -110,6 +127,11 @@ public class AdvThaumApi {
 		return null;
 	}
 	
+	/**
+	 * Used for focies that can work with holding
+	 * @param entity Player that use foci
+	 * @param cd Cooldown before use
+	 */
 	public static void setCooldown(EntityLivingBase entity, int cd)
 	{
 		Class manage = null;

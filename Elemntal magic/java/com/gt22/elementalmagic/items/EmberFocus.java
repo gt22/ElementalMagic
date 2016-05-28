@@ -33,7 +33,6 @@ public class EmberFocus extends ItemFocusBasic {
 		AspectList ret = new AspectList();
 		double discount = getUpgradeLevel(focusstack, FocusUpgradeType.frugal) / 10;
 		ret.add(Aspect.FIRE, (int) Math.ceil(500 - 500 * discount));
-		ret.add(Aspect.ENTROPY, (int) Math.ceil(500 - 500 * discount));
 		return ret;
 	}
 

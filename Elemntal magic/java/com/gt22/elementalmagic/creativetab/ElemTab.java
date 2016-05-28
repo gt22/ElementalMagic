@@ -13,7 +13,7 @@ public class ElemTab extends CreativeTabs {
 
 	@Override
 	public Item getTabIconItem() {
-		return ItemRegistry.thunderFocus;
+		return ItemRegistry.windFocus;
 	}
 
 }
