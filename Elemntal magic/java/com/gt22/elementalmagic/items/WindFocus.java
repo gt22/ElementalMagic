@@ -30,6 +30,11 @@ public class WindFocus extends ItemFocusBasic {
 	}
 	
 	@Override
+	public boolean isVisCostPerTick(ItemStack focusstack) {
+	return true;
+	}
+	
+	@Override
 	public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack focusstack, int rank) {
 		FocusUpgradeType[] ret = null;
 		switch(rank)

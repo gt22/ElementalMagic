@@ -3,12 +3,13 @@ package com.gt22.elementalmagic.api;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.wands.ItemFocusBasic;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.wands.ItemFocusBasic;
 
 public class AdvThaumApi {
 	
@@ -56,6 +57,72 @@ public class AdvThaumApi {
 			}
 		}
 		return false;
+	}
+	
+	public static int getVis(ItemStack wand, Aspect aspect)
+	{
+		Class wandclass = null;
+		try {
+			wandclass = Class.forName(wandpath);
+		} catch (ClassNotFoundException e1) {
+			System.out.println("Unable to find wand class from thaumcraft");
+			e1.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		Method get = null;
+		try {
+			Class[] params = new Class[2];
+			params[0] = ItemStack.class;
+			params[1] = Aspect.class;
+			get = wandclass.getMethod("getVis", params);
+		} catch (NoSuchMethodException | SecurityException e) {
+			System.out.println("Unable to find getVis method from wand class from thaumcraft");
+			e.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		try {
+			return (int) get.invoke(wandclass.newInstance(), wand, aspect);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | InstantiationException e) {
+			System.out.println("Unable to invoke addVis method from thaumcraft");
+			e.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		return 0;
+	}
+	
+	public static int insertVis(ItemStack wand, Aspect aspect, int amount, boolean insertit)
+	{
+		Class wandclass = null;
+		try {
+			wandclass = Class.forName(wandpath);
+		} catch (ClassNotFoundException e1) {
+			System.out.println("Unable to find wand class from thaumcraft");
+			e1.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		Method insert = null;
+		try {
+			Class[] params = new Class[4];
+			params[0] = ItemStack.class;
+			params[1] = Aspect.class;
+			params[2] = int.class;
+			params[3] = boolean.class;
+			insert = wandclass.getMethod("addVis", params);
+		} catch (NoSuchMethodException | SecurityException e) {
+			System.out.println("Unable to find addVis method from wand class from thaumcraft");
+			e.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		try {
+			return (int) insert.invoke(wandclass.newInstance(), wand, aspect, amount, insertit);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | InstantiationException e) {
+			System.out.println("Unable to invoke addVis method from thaumcraft");
+			e.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		return 0;
 	}
 	
 	/**
