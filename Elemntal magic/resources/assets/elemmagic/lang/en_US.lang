@@ -1,0 +1,16 @@
+item.EmberFocus.name=Ember focus
+item.WindFocus.name=Wind focus
+item.CurrentFocus.name=Current focus
+item.NatureFocus.name=Nature focus
+em.upgrade.reverse=Reverse
+em.upgrade.reverse.text=Foci will now pull enemies instead of pushing them
+em.upgrade.lava=Lava
+em.upgrade.lava.text=Foci will now create lava instead of water
+em.upgrade.seed=Seeds
+em.upgrade.seed.text=Foci will have chance to drop seeds while growing grass
+em.upgrade.grass=Grass
+em.upgrade.grass.text=Foci will have chance to create tall grass on block
+em.upgrade.podzol=Podzol
+em.upgrade.podzol.text=Foci will now create podzol instead of grass
+em.upgrade.mushroom=Myceleum
+em.upgrade.mushroom.text=Foci will now create myceleum instead of grass
