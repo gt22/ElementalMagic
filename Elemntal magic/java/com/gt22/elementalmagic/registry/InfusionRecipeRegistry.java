@@ -8,5 +8,5 @@ import thaumcraft.api.crafting.InfusionRecipe;
 
 public class InfusionRecipeRegistry {
 	private static ItemStack[] elemwandrecipe = {ItemApi.getItem("itemShard", 0), ItemApi.getItem("itemShard", 2), ItemApi.getItem("itemShard", 3), ItemApi.getItem("itemShard", 1)};
-	public static InfusionRecipe elementalwand = new InfusionRecipe("ROD_ELEM", new ItemStack(ItemRegistry.elemRod), 2, new AspectList().add(Aspect.AIR, 32).add(Aspect.WATER, 32).add(Aspect.EARTH, 32) .add(Aspect.FIRE, 32).add(Aspect.MAGIC, 32), ItemApi.getItem("itemWandRod", 0), elemwandrecipe);
+	public static InfusionRecipe elementalwand = new InfusionRecipe("ROD_ELEM", new ItemStack(ItemRegistry.elemRod), 4, new AspectList().add(Aspect.AIR, 32).add(Aspect.WATER, 32).add(Aspect.EARTH, 32) .add(Aspect.FIRE, 32).add(Aspect.MAGIC, 32), ItemApi.getItem("itemWandRod", 0), elemwandrecipe);
 }

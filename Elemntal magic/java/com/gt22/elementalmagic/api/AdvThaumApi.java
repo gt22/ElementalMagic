@@ -59,6 +59,37 @@ public class AdvThaumApi {
 		return false;
 	}
 	
+	public static void setVis(ItemStack wand, AspectList aspects)
+	{
+		Class wandclass = null;
+		try {
+			wandclass = Class.forName(wandpath);
+		} catch (ClassNotFoundException e1) {
+			System.out.println("Unable to find wand class from thaumcraft");
+			e1.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		Method set = null;
+		try {
+			Class[] params = new Class[2];
+			params[0] = ItemStack.class;
+			params[1] = AspectList.class;
+			set = wandclass.getMethod("storeAllVis", params);
+		} catch (NoSuchMethodException | SecurityException e) {
+			System.out.println("Unable to find storeAllVis method from wand class from thaumcraft");
+			e.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		try {
+			set.invoke(wandclass.newInstance(), wand, aspects);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | InstantiationException e) {
+			System.out.println("Unable to invoke storeAllVis method from thaumcraft");
+			e.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+	}
+	
 	public static int getVis(ItemStack wand, Aspect aspect)
 	{
 		Class wandclass = null;
@@ -84,7 +115,7 @@ public class AdvThaumApi {
 			return (int) get.invoke(wandclass.newInstance(), wand, aspect);
 		} catch (IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | InstantiationException e) {
-			System.out.println("Unable to invoke addVis method from thaumcraft");
+			System.out.println("Unable to invoke getVis method from thaumcraft");
 			e.printStackTrace();
 			Minecraft.getMinecraft().shutdown();
 		}
@@ -159,6 +190,37 @@ public class AdvThaumApi {
 			return null;
 		}
 	}
+	
+	public static int getMaxVis(ItemStack wand)
+	{
+		Class wandclass = null;
+		try {
+			wandclass = Class.forName(wandpath);
+		} catch (ClassNotFoundException e) {
+			System.out.println("Unable to find wand class from thaumcraft");
+			e.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		Class param = ItemStack.class;
+		Method get = null;
+		try {
+			get = wandclass.getMethod("getMaxVis", param);
+		} catch (NoSuchMethodException | SecurityException e) {
+			System.out.println("Unable to find getMaxVis method from wand class from thaumcraft");
+			e.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		
+		try {
+			return (int) get.invoke(wandclass.newInstance(), wand);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | InstantiationException e) {
+			System.out.println("Unable to invoke getMaxVis method from thaumcraft");
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 	/**
 	 * Allowing to get item of the foci. I don't know for what
 	 * @param wand

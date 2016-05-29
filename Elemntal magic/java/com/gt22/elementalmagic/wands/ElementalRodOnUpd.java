@@ -15,26 +15,39 @@ public class ElementalRodOnUpd implements IWandRodOnUpdate {
 		if(!player.worldObj.isRemote && player.ticksExisted % 100 == 0)
 		{
 			
-			if(AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100 < 75)
+			if(AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100 < 74)
 			{	
 				AdvThaumApi.insertVis(itemstack, Aspect.FIRE, 1, true);
 			}
-			if(AdvThaumApi.getVis(itemstack, Aspect.EARTH) / 100 < 75)
+			else if (AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100 < 75)
+			{
+				AdvThaumApi.insertVis(itemstack, Aspect.FIRE, 75 - AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100, true);
+			}
+			if(AdvThaumApi.getVis(itemstack, Aspect.EARTH) / 100 < 74)
 			{	
 				AdvThaumApi.insertVis(itemstack, Aspect.EARTH, 1, true);
 			}
-			if(AdvThaumApi.getVis(itemstack, Aspect.AIR) / 100 < 75)
+			else if (AdvThaumApi.getVis(itemstack, Aspect.EARTH) / 100 < 75)
+			{
+				AdvThaumApi.insertVis(itemstack, Aspect.EARTH, 75 - AdvThaumApi.getVis(itemstack, Aspect.EARTH) / 100, true);
+			}
+			if(AdvThaumApi.getVis(itemstack, Aspect.AIR) / 100 < 74)
 			{	
 				AdvThaumApi.insertVis(itemstack, Aspect.AIR, 1, true);
 			}
-			if(AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100 < 75)
+			else if (AdvThaumApi.getVis(itemstack, Aspect.AIR) / 100 < 75)
+			{
+				AdvThaumApi.insertVis(itemstack, Aspect.AIR, 75 - AdvThaumApi.getVis(itemstack, Aspect.AIR) / 100, true);
+			}
+			if(AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100 < 74)
 			{	
 				AdvThaumApi.insertVis(itemstack, Aspect.WATER, 1, true);
 			}
-			if(!AdvThaumApi.drawVis(itemstack, player, new AspectList().add(Aspect.ORDER, 100).add(Aspect.ENTROPY, 100), true))
+			else if (AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100 < 75)
 			{
-				AdvThaumApi.drawVis(itemstack, player, new AspectList().add(Aspect.ORDER, AdvThaumApi.getVis(itemstack, Aspect.ORDER)).add(Aspect.ENTROPY, AdvThaumApi.getVis(itemstack, Aspect.ENTROPY)), true);
+				AdvThaumApi.insertVis(itemstack, Aspect.WATER, 75 - AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100, true);
 			}
+			AdvThaumApi.setVis(itemstack, new AspectList().add(Aspect.ORDER, 0).add(Aspect.ENTROPY, 0));
 		}
 		
 	}

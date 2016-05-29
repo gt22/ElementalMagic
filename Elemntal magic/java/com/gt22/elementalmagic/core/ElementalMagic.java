@@ -11,7 +11,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.SidedProxy;
 
-@Mod(version = ElementalMagic.version, modid = ElementalMagic.modid, name = ElementalMagic.name)
+@Mod(version = ElementalMagic.version, modid = ElementalMagic.modid, name = ElementalMagic.name, dependencies = "required-after:Thaumcraft")
 public class ElementalMagic {
 	public static final String name = "Elemental magic";
 	public static final String modid = "elemmagic";
