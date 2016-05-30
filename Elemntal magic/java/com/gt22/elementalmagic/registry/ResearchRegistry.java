@@ -43,5 +43,8 @@ public class ResearchRegistry {
 		ResearchItem elemcap = new ResearchItem("CAP_ELEMCAP", tabname, new AspectList().add(elems).add(Aspect.MAGIC, 5), 1, 2, 1, new ItemStack(ItemRegistry.elemCap));
 		ResearchPage elemcappage = new ResearchPage(researchprefix + "elemcap.text"), elemcappage2 = new ResearchPage(ArcaneRecipeRegistry.elemCap);
 		elemcap.setParents("elemmagic", "CAP_gold").setPages(elemcappage, elemcappage2).setConcealed().registerResearchItem();
+		ResearchItem elemingot = new ResearchItem("elemingot", tabname, new AspectList().add(elems).add(Aspect.METAL, 5), -2, 0, 1, new ItemStack(ItemRegistry.craftItem, 1, 1));
+		ResearchPage elemingotpage = new ResearchPage(researchprefix + "elemingot.text"), elemingotpage2 = new ResearchPage(CrucibleRecipeRegistry.elemItems), elemingotpage3 = new ResearchPage(ArcaneRecipeRegistry.tools);
+		elemingot.setParents("elemmagic", "THAUMIUM").setPages(elemingotpage, elemingotpage2, elemingotpage3).setConcealed().registerResearchItem();
 	}
 }

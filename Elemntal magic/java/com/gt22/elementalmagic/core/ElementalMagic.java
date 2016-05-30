@@ -1,5 +1,8 @@
 package com.gt22.elementalmagic.core;
 
+import net.minecraftforge.common.config.Configuration;
+
+import com.gt22.elementalmagic.config.CfgValues;
 import com.gt22.elementalmagic.creativetab.ElemTab;
 import com.gt22.elementalmagic.proxy.CommonProxy;
 
@@ -24,7 +27,7 @@ public class ElementalMagic {
 	private static final String serverproxy = "com.gt22.elementalmagic.proxy.ServerProxy";
 	
 	public static ElemTab tab = new ElemTab("ElementalMagic");
-	
+	public static Configuration cfg;
 	@Instance(modid)
 	public static ElementalMagic instance = new ElementalMagic();
 	
@@ -34,6 +37,10 @@ public class ElementalMagic {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e)
 	{
+		cfg = new Configuration(e.getSuggestedConfigurationFile());
+		cfg.load();
+		CfgValues.init(cfg);
+		cfg.save();
 		proxy.preInit(e);
 	}
 	@EventHandler

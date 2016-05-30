@@ -14,6 +14,7 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
@@ -106,11 +107,11 @@ public class CurrentFocus extends ItemFocusBasic {
 		{
 			for(int j = z - range; j < z + range + 1; j++)
 			{
-				if(!world.isRemote && AdvThaumApi.drawVis(wandstack, player, getVisCost(AdvThaumApi.getFocusStack(wandstack)), false))
+				if(!world.isRemote && ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, getVisCost(AdvThaumApi.getFocusStack(wandstack)), false, false))
 				{
 					if(place(i, y, j, world, wandstack, player) && !drawed)
 					{
-						AdvThaumApi.drawVis(wandstack, player, getVisCost(AdvThaumApi.getFocusStack(wandstack)), true);
+						ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, getVisCost(AdvThaumApi.getFocusStack(wandstack)), true, false);
 						drawed = true;
 					}
 				}

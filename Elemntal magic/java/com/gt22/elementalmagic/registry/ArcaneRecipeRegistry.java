@@ -10,7 +10,8 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
 
 public class ArcaneRecipeRegistry {
-	public static ShapedArcaneRecipe windFoci, emberFoci, currentFoci, natureFoci, inertFoci, elemCap;
+	public static ShapedArcaneRecipe windFoci, emberFoci, currentFoci, natureFoci, inertFoci, elemCap, elemPcik, elemSword, elemAxe, elemShovel, elemHoe;
+	public static ShapedArcaneRecipe[] tools;
 	public static void init(){
 		windFoci = ThaumcraftApi.addArcaneCraftingRecipe(
 		"windfocus",
@@ -76,6 +77,56 @@ public class ArcaneRecipeRegistry {
 		'3', ItemApi.getItem("itemShard", 3),
 		'4', ItemApi.getItem("itemShard", 1),
 		'c', ItemApi.getItem("itemWandCap", 1));
+		
+		elemPcik = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
+		new ItemStack(ItemRegistry.elemPick),
+		new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
+			"zzz",
+			" x ",
+			" x ",
+			'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
+			'x', new ItemStack(ItemRegistry.craftItem, 1, 2));
+		elemAxe = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
+				new ItemStack(ItemRegistry.elemAxe),
+				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
+				true,
+				"zz ",
+				"zx ",
+				" x ",
+				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
+				'x', new ItemStack(ItemRegistry.craftItem, 1, 2));
+		elemHoe = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
+				new ItemStack(ItemRegistry.elemHoe),
+				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
+				true,
+				"zz ",
+				" x ",
+				" x ",
+				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
+				'x', new ItemStack(ItemRegistry.craftItem, 1, 2));
+		elemSword = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
+				new ItemStack(ItemRegistry.elemSword),
+				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
+				" z ",
+				" z ",
+				" x ",
+				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
+				'x', new ItemStack(ItemRegistry.craftItem, 1, 2));
+		elemShovel = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
+				new ItemStack(ItemRegistry.elemShovel),
+				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
+				true,
+				" z ",
+				" x ",
+				" x ",
+				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
+				'x', new ItemStack(ItemRegistry.craftItem, 1, 2));
+		tools = new ShapedArcaneRecipe[5];
+		tools[0] = elemPcik;
+		tools[1] = elemAxe;
+		tools[2] = elemShovel;
+		tools[3] = elemSword;
+		tools[4] = elemHoe;
 	}
 	
 

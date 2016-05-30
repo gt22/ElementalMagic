@@ -1,0 +1,28 @@
+package com.gt22.elementalmagic.items;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.World;
+
+import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.registry.Materials;
+
+public class ElemSword extends ItemSword {
+
+	public ElemSword(String unlocName) {
+		super(Materials.toolMatElem);
+		setUnlocalizedName(unlocName);
+		setTextureName(ElementalMagic.modid + ":" + unlocName);
+		setCreativeTab(ElementalMagic.tab);
+	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World worldObj, EntityPlayer player) {
+		player.addPotionEffect(new PotionEffect(5, 200, 0));
+		stack.damageItem(5, player);
+		return stack;
+	}
+
+}

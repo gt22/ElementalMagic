@@ -14,8 +14,8 @@ public class ElementalRodOnUpd implements IWandRodOnUpdate {
 	public void onUpdate(ItemStack itemstack, EntityPlayer player) {
 		if(!player.worldObj.isRemote && player.ticksExisted % 100 == 0)
 		{
-			
-			if(AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100 < 74)
+			AdvThaumApi.setVis(itemstack, new AspectList().add(Aspect.AIR, 7500).add(Aspect.EARTH, 7500).add(Aspect.WATER, 7500).add(Aspect.FIRE, 7500).add(Aspect.ORDER, 7500).add(Aspect.ENTROPY, 7500));
+			/*if(AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100 < 74)
 			{	
 				AdvThaumApi.insertVis(itemstack, Aspect.FIRE, 1, true);
 			}
@@ -47,7 +47,7 @@ public class ElementalRodOnUpd implements IWandRodOnUpdate {
 			{
 				AdvThaumApi.insertVis(itemstack, Aspect.WATER, 75 - AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100, true);
 			}
-			AdvThaumApi.setVis(itemstack, new AspectList().add(Aspect.ORDER, 0).add(Aspect.ENTROPY, 0));
+			AdvThaumApi.setVis(itemstack, new AspectList().add(Aspect.ORDER, 0).add(Aspect.ENTROPY, 0));*/
 		}
 		
 	}

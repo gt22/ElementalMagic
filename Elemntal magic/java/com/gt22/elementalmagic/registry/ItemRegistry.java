@@ -15,12 +15,18 @@ import thaumcraft.api.wands.WandRod;
 import com.gt22.elementalmagic.core.ElementalMagic;
 import com.gt22.elementalmagic.items.CraftItem;
 import com.gt22.elementalmagic.items.CurrentFocus;
+import com.gt22.elementalmagic.items.ElemAxe;
+import com.gt22.elementalmagic.items.ElemHoe;
+import com.gt22.elementalmagic.items.ElemPick;
+import com.gt22.elementalmagic.items.ElemShovel;
+import com.gt22.elementalmagic.items.ElemSword;
 import com.gt22.elementalmagic.items.ElementalCap;
 import com.gt22.elementalmagic.items.ElementalRod;
 import com.gt22.elementalmagic.items.EmberFocus;
 import com.gt22.elementalmagic.items.NatureFocus;
 import com.gt22.elementalmagic.items.VoidAspecterFoci;
 import com.gt22.elementalmagic.items.VoidCheckerFoci;
+import com.gt22.elementalmagic.items.VoidMatrixArmor;
 import com.gt22.elementalmagic.items.VoidTrasformerFoci;
 import com.gt22.elementalmagic.items.WindFocus;
 import com.gt22.elementalmagic.wands.ElementalRodOnUpd;
@@ -41,6 +47,14 @@ public class ItemRegistry {
 	public static Item voidTransformerFocus;
 	public static Item voidCheckerFocus;
 	public static Item voidAspecterFocus;
+	public static Item voidMatrixHelm;
+	public static Item voidMatrixChest;
+	public static Item voidMatrixLegs;
+	public static Item elemPick;
+	public static Item elemSword;
+	public static Item elemAxe;
+	public static Item elemShovel;
+	public static Item elemHoe;
 	public static void register(Item item)
 	{
 		GameRegistry.registerItem(item, item.getUnlocalizedName());
@@ -54,6 +68,8 @@ public class ItemRegistry {
 		register(natureFocus = new NatureFocus("NatureFocus"));
 		craftItem = new CraftItem();
 		craftItem.addCraftItem("InertFocus");
+		craftItem.addCraftItem("ElementalIngot");
+		craftItem.addCraftItem("ElementalStick");
 		register(craftItem);
 		elemRod = new ElementalRod("ElementalRod");
 		elementalRod = new WandRod("ELEM", 75, new ItemStack(elemRod, 1, 0), 20, new ElementalRodOnUpd(), new ResourceLocation(ElementalMagic.modid, "other/elem_rod.png"));
@@ -68,6 +84,14 @@ public class ItemRegistry {
 		register(voidTransformerFocus = new VoidTrasformerFoci("VoidTransformerFocus"));
 		register(voidCheckerFocus = new VoidCheckerFoci("VoidCheckerFocus"));
 		register(voidAspecterFocus = new VoidAspecterFoci("VoidAspecterFocus"));
+		register(voidMatrixHelm = new VoidMatrixArmor("VoidMatrixHelm", Materials.armorMatVoidMatrixArmor, 4, 0));
+		register(voidMatrixChest = new VoidMatrixArmor("VoidMatrixChest", Materials.armorMatVoidMatrixArmor, 4, 1));
+		register(voidMatrixLegs = new VoidMatrixArmor("VoidMatrixLegs", Materials.armorMatVoidMatrixArmor, 4, 2));
+		register(elemAxe = new ElemAxe("ElemAxe"));
+		register(elemPick = new ElemPick("ElementalPick"));
+		register(elemShovel = new ElemShovel("ElementalShovel"));
+		register(elemSword = new ElemSword("ElementalSword"));
+		register(elemHoe = new ElemHoe("ElementalHoe"));
 	}
 	
 }

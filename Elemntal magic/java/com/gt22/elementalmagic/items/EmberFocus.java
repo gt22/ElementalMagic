@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
@@ -86,14 +87,14 @@ public class EmberFocus extends ItemFocusBasic {
 	@Override
 	public ItemStack onFocusRightClick(ItemStack wandstack, World world, EntityPlayer player, MovingObjectPosition movingobjectposition) {
 		ItemStack focus = AdvThaumApi.getFocusStack(wandstack);
-		if(AdvThaumApi.drawVis(wandstack, player, getVisCost(focus), false))
+		if(ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, getVisCost(focus), false, false))
 		{
 			List <EntityLiving> list = world.getEntitiesWithinAABB(EntityMob.class, player.boundingBox.expand(5D + getUpgradeLevel(focus, FocusUpgradeType.enlarge), 5D + getUpgradeLevel(focus, FocusUpgradeType.enlarge), 5D + getUpgradeLevel(focus, FocusUpgradeType.enlarge)));
 			if(list.size() > 0)
 			{
 				if(!world.isRemote)
 				{
-					AdvThaumApi.drawVis(wandstack, player, getVisCost(focus), true);
+					ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, getVisCost(focus), true, false);
 				}
 				for(int i = 0; i < list.size(); i++)
 				{

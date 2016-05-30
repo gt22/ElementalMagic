@@ -7,6 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
@@ -98,10 +99,10 @@ public class NatureFocus extends ItemFocusBasic {
 	}
 	@Override
 	public ItemStack onFocusRightClick(ItemStack wandstack, World world, EntityPlayer player, MovingObjectPosition mobj) {
-		if(!world.isRemote && AdvThaumApi.drawVis(wandstack, player, getVisCost(AdvThaumApi.getFocusStack(wandstack)), false))
+		if(!world.isRemote && ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, getVisCost(AdvThaumApi.getFocusStack(wandstack)), false, false))
 		{
 			int range = getUpgradeLevel(AdvThaumApi.getFocusStack(wandstack), FocusUpgradeType.enlarge);
-			AdvThaumApi.drawVis(wandstack, player, getVisCost(AdvThaumApi.getFocusStack(wandstack)), true);
+			ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, getVisCost(AdvThaumApi.getFocusStack(wandstack)), true, false);
 			int x = mobj.blockX, y = mobj.blockY, z = mobj.blockZ;
 			ItemStack foci = AdvThaumApi.getFocusStack(wandstack);
 			if(player.isSneaking())

@@ -13,9 +13,9 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.ItemFocusBasic;
 
 import com.gt22.elementalmagic.api.AdvThaumApi;
-import com.gt22.elementalmagic.api.MatrixType;
 import com.gt22.elementalmagic.api.VoidMatrixApi;
 import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.enums.MatrixType;
 
 public class VoidTrasformerFoci extends ItemFocusBasic {
 	public VoidTrasformerFoci(String unlocName) {
@@ -28,21 +28,13 @@ public class VoidTrasformerFoci extends ItemFocusBasic {
 	@Override
 	public AspectList getVisCost(ItemStack focusstack) {
 		AspectList ret = new AspectList();
-		return ret;
-	}
-	/**
-	 * Becase discount on this foci will break whole balance
-	 */
-	public AspectList getRealVisCost(ItemStack focustack)
-	{
-		AspectList ret = new AspectList();
 		ret.add(Aspect.ORDER, 5000).add(Aspect.ENTROPY, 5000);
 		return ret;
 	}
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		AspectList al = this.getRealVisCost(stack);
+		AspectList al = this.getVisCost(stack);
 		if (al!=null && al.size()>0) {
 			list.add(StatCollector.translateToLocal(isVisCostPerTick(stack)?"item.Focus.cost2":"item.Focus.cost1"));
 			for (Aspect aspect:al.getAspectsSorted()) {
@@ -52,9 +44,6 @@ public class VoidTrasformerFoci extends ItemFocusBasic {
 			}
 		}
 		addFocusInformation(stack,player,list,par4);
-		//list.add("Vis per cast");
-		//list.add("Ordo: 50");
-		//list.add("Perditio: 50");
 	}
 	
 	@Override
@@ -65,9 +54,9 @@ public class VoidTrasformerFoci extends ItemFocusBasic {
 	@Override
 	public ItemStack onFocusRightClick(ItemStack wandstack, World world,
 			EntityPlayer player, MovingObjectPosition movingobjectposition) {
-		if(AdvThaumApi.getVis(wandstack, Aspect.ORDER) >= getRealVisCost(AdvThaumApi.getFocusStack(wandstack)).getAmount(Aspect.ORDER) && AdvThaumApi.getVis(wandstack, Aspect.ENTROPY) >= getRealVisCost(AdvThaumApi.getFocusStack(wandstack)).getAmount(Aspect.ENTROPY) && VoidMatrixApi.getMatrix(MatrixType.STABLE, player) <= VoidMatrixApi.maxMatrix - 5 && VoidMatrixApi.getMatrix(MatrixType.UNSTABLE, player) <= VoidMatrixApi.maxMatrix - 5)
+		if(AdvThaumApi.getVis(wandstack, Aspect.ORDER) >= getVisCost(AdvThaumApi.getFocusStack(wandstack)).getAmount(Aspect.ORDER) && AdvThaumApi.getVis(wandstack, Aspect.ENTROPY) >= getVisCost(AdvThaumApi.getFocusStack(wandstack)).getAmount(Aspect.ENTROPY) && VoidMatrixApi.getMatrix(MatrixType.STABLE, player) <= VoidMatrixApi.maxMatrix - 5 && VoidMatrixApi.getMatrix(MatrixType.UNSTABLE, player) <= VoidMatrixApi.maxMatrix - 5)
 		{
-			AdvThaumApi.setVis(wandstack, new AspectList().add(Aspect.ORDER, AdvThaumApi.getVis(wandstack, Aspect.ORDER) - getRealVisCost(AdvThaumApi.getFocusStack(wandstack)).getAmount(Aspect.ORDER)).add(Aspect.ENTROPY, AdvThaumApi.getVis(wandstack, Aspect.ENTROPY) - getRealVisCost(AdvThaumApi.getFocusStack(wandstack)).getAmount(Aspect.ENTROPY)));
+			AdvThaumApi.setVis(wandstack, new AspectList().add(Aspect.ORDER, AdvThaumApi.getVis(wandstack, Aspect.ORDER) - getVisCost(AdvThaumApi.getFocusStack(wandstack)).getAmount(Aspect.ORDER)).add(Aspect.ENTROPY, AdvThaumApi.getVis(wandstack, Aspect.ENTROPY) - getVisCost(AdvThaumApi.getFocusStack(wandstack)).getAmount(Aspect.ENTROPY)));
 			VoidMatrixApi.addMatrix(MatrixType.STABLE, 5, player);
 			VoidMatrixApi.addMatrix(MatrixType.UNSTABLE, 5, player);
 		}

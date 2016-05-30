@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
@@ -102,18 +103,18 @@ public class WindFocus extends ItemFocusBasic {
 	
 	@Override
 	public void onUsingFocusTick(ItemStack wandstack, EntityPlayer player, int count) {
-		if(!AdvThaumApi.drawVis(wandstack, player, getVisCost(new ItemStack(AdvThaumApi.getFoci(wandstack))), false))
+		if(!ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, getVisCost(new ItemStack(AdvThaumApi.getFoci(wandstack))), false, false))
 		{
 			player.stopUsingItem();
 			return;
 		}
 		int range = 3 + getUpgradeLevel(AdvThaumApi.getFocusStack(wandstack), FocusUpgradeType.enlarge);
 		List <Entity> list = player.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(player.posX - range, player.posY - range, player.posZ - range, player.posX + range, player.posY + range, player.posZ + range));
-		if(player.worldObj.isRemote && AdvThaumApi.drawVis(wandstack, player,  getVisCost(new ItemStack(AdvThaumApi.getFoci(wandstack))), false))
+		if(player.worldObj.isRemote && ThaumcraftApiHelper.consumeVisFromWand(wandstack, player,  getVisCost(new ItemStack(AdvThaumApi.getFoci(wandstack))), false, false))
 		{
 			player.worldObj.spawnParticle("smoke", player.posX + player.worldObj.rand.nextDouble(), player.posY + player.worldObj.rand.nextDouble(), player.posZ, 0, 0.1, 0);
 		}
-		if(!player.worldObj.isRemote && AdvThaumApi.drawVis(wandstack, player,  getVisCost(new ItemStack(AdvThaumApi.getFoci(wandstack))), true))
+		if(!player.worldObj.isRemote && ThaumcraftApiHelper.consumeVisFromWand(wandstack, player,  getVisCost(new ItemStack(AdvThaumApi.getFoci(wandstack))), true, false))
 		{
 			for(int i = 0; i < list.size(); i++)
 			{

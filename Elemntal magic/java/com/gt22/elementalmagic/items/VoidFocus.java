@@ -10,8 +10,8 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.ItemFocusBasic;
 
 import com.gt22.elementalmagic.api.AdvThaumApi;
-import com.gt22.elementalmagic.api.MatrixType;
 import com.gt22.elementalmagic.api.VoidMatrixApi;
+import com.gt22.elementalmagic.enums.MatrixType;
 
 public class VoidFocus extends ItemFocusBasic {
 	

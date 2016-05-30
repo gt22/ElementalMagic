@@ -1,9 +1,9 @@
 package com.gt22.elementalmagic.items;
 
 import com.gt22.elementalmagic.api.AdvThaumApi;
-import com.gt22.elementalmagic.api.MatrixType;
 import com.gt22.elementalmagic.api.VoidMatrixApi;
 import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.enums.MatrixType;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

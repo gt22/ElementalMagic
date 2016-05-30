@@ -10,6 +10,7 @@ import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
 
 import com.gt22.elementalmagic.registry.ArcaneRecipeRegistry;
+import com.gt22.elementalmagic.registry.CrucibleRecipeRegistry;
 import com.gt22.elementalmagic.registry.InfusionRecipeRegistry;
 import com.gt22.elementalmagic.registry.ItemRegistry;
 import com.gt22.elementalmagic.registry.ResearchRegistry;
@@ -35,6 +36,8 @@ public class CommonProxy {
 	public void postInit(FMLPostInitializationEvent e)
 	{
 		ArcaneRecipeRegistry.init();
+		InfusionRecipeRegistry.init();
+		CrucibleRecipeRegistry.init();
 		ResearchRegistry.init();
 	}
 	

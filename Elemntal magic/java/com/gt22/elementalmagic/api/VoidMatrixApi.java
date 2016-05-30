@@ -1,6 +1,7 @@
 package com.gt22.elementalmagic.api;
 
 import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.enums.MatrixType;
 
 import net.minecraft.entity.player.EntityPlayer;
 

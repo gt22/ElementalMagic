@@ -3,10 +3,12 @@ package com.gt22.elementalmagic.api;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.ItemFocusBasic;
@@ -14,50 +16,6 @@ import thaumcraft.api.wands.ItemFocusBasic;
 public class AdvThaumApi {
 	
 	private static final String wandpath = "thaumcraft.common.items.wands.ItemWandCasting";
-	/**
-	 * Allowing to draw vis from the wand
-	 * @param wand ItemStack of the wand to draw
-	 * @param player Player that hold the wand, for armor discount
-	 * @param aspects Aspects to be consumed
-	 * @param consume Consume aspect of not. If false method will just run a check can aspects be consumed
-	 * @return true if consume/can consume, false if not
-	 */
-	public static boolean drawVis(ItemStack wand, EntityPlayer player, AspectList aspects, boolean consume)
-	{
-		Class wandclass = null;
-		try {
-			wandclass = Class.forName(wandpath);
-		} catch (ClassNotFoundException e1) {
-			System.out.println("Unable to find wand class from thaumcraft");
-			e1.printStackTrace();
-			Minecraft.getMinecraft().shutdown();
-		}
-				Method draw = null;
-		try {
-			Class[] params = new Class[5];
-			params[0] = ItemStack.class;
-			params[1] = EntityPlayer.class;
-			params[2] = AspectList.class;
-			params[3] = boolean.class;
-			params[4] = boolean.class;
-			draw = wandclass.getMethod("consumeAllVis", params);
-		} catch (NoSuchMethodException | SecurityException e) {
-			System.out.println("Unable to find consumeAllVis method from wand class from thaumcraft");
-			e.printStackTrace();
-			Minecraft.getMinecraft().shutdown();
-		}
-		if(draw != null)
-		{
-			try {
-				return (boolean) draw.invoke(wandclass.newInstance(), wand, player, aspects, consume, false);
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {
-				System.out.println("Unable to invoke consumeAllVis method from thaumcraft");
-				e.printStackTrace();
-				Minecraft.getMinecraft().shutdown();
-			}
-		}
-		return false;
-	}
 	
 	public static void setVis(ItemStack wand, AspectList aspects)
 	{
@@ -287,6 +245,47 @@ public class AdvThaumApi {
 		{
 			try {
 				setcd.invoke(manage.newInstance(), entity, cd);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {
+				System.out.println("Unable to invoke setCooldown method from thaumcraft");
+				e.printStackTrace();
+				Minecraft.getMinecraft().shutdown();
+			}
+		}
+	}
+
+	public static void breakFurthestBlock(World worldObj, int x, int y, int z,
+			Block bi, EntityPlayer player, boolean b, int i) {
+		
+		Class utils = null;
+		try {
+			utils = Class.forName("thaumcraft.common.lib.utils.BlockUtils");
+		} catch (ClassNotFoundException e1) {
+			System.out.println("Unable to find BlockUtils class from thaumcraft");
+			e1.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		
+		Method breakblock = null;
+		try {
+			Class[] params = new Class[8];
+			params[0] = World.class;
+			params[1] = int.class;
+			params[2] = int.class;
+			params[3] = int.class;
+			params[4] = Block.class;
+			params[5] = EntityPlayer.class;
+			params[6] = boolean.class;
+			params[7] = int.class;
+			breakblock = utils.getMethod("breakFurthestBlock", params);
+		} catch (NoSuchMethodException | SecurityException e) {
+			System.out.println("Unable to find breakFurthestBlock method in wand manger class from thaumcraft");
+			e.printStackTrace();
+			Minecraft.getMinecraft().shutdown();
+		}
+		if(breakblock != null)
+		{
+			try {
+				breakblock.invoke(utils.newInstance(), worldObj, x, y, z, bi, player, b, i);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {
 				System.out.println("Unable to invoke setCooldown method from thaumcraft");
 				e.printStackTrace();
