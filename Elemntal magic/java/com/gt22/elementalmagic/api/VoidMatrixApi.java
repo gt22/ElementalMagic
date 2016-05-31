@@ -1,6 +1,9 @@
 package com.gt22.elementalmagic.api;
 
+import thaumcraft.api.aspects.Aspect;
+
 import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.enums.ElemCoreType;
 import com.gt22.elementalmagic.enums.MatrixType;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +13,38 @@ public class VoidMatrixApi {
 	public static String getMatrixNBTKey(MatrixType type)
 	{
 		return type == MatrixType.STABLE ? ElementalMagic.modid + ".matrixStable" : ElementalMagic.modid + ".matrixUnstable";
+	}
+	
+	public static MatrixType getMatrixTypeFromAsper(Aspect aspect)
+	{
+		if(aspect == Aspect.AIR || aspect == Aspect.FIRE)
+		{
+			return MatrixType.UNSTABLE;
+		}
+		if(aspect == Aspect.EARTH || aspect == Aspect.WATER)
+		{
+			return MatrixType.STABLE;
+		}
+		return null;
+	}
+	
+	public static MatrixType getMatrixTypeFromCoreType(ElemCoreType type)
+	{
+		switch(type)
+		{
+		case FIRE: case AIR:
+		{
+			return MatrixType.UNSTABLE;
+		}
+		case EARTH: case WATER:
+		{
+			return MatrixType.STABLE;
+		}
+		default:
+		{
+			return null;
+		}
+		}
 	}
 	
 	public static int getMatrix(MatrixType type, EntityPlayer player)

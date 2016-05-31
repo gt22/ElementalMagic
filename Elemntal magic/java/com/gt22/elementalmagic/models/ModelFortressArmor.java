@@ -579,16 +579,8 @@ public class ModelFortressArmor
           set++;
           if (a == 3)
           {
-            if ((piece.hasTagCompound()) && (piece.stackTagCompound.hasKey("mask"))) {
-              hasMask.put(Integer.valueOf(entity.getEntityId()), Integer.valueOf(piece.stackTagCompound.getInteger("mask")));
-            } else {
               hasMask.remove(Integer.valueOf(entity.getEntityId()));
-            }
-            if ((piece.hasTagCompound()) && (piece.stackTagCompound.hasKey("goggles"))) {
-              hasGoggles.put(Integer.valueOf(entity.getEntityId()), Boolean.valueOf(true));
-            } else {
               hasGoggles.remove(Integer.valueOf(entity.getEntityId()));
-            }
           }
         }
       }

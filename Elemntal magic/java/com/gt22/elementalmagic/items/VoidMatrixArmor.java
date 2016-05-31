@@ -190,17 +190,12 @@ public class VoidMatrixArmor
   
   public EnumRarity getRarity(ItemStack itemstack)
   {
-    return EnumRarity.rare;
+    return EnumRarity.epic;
   }
   
   public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
   {
-    if ((stack.hasTagCompound()) && (stack.stackTagCompound.hasKey("goggles"))) {
-      list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("item.ItemGoggles.name"));
-    }
-    if ((stack.hasTagCompound()) && (stack.stackTagCompound.hasKey("mask"))) {
-      list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal(new StringBuilder().append("item.HelmetFortress.mask.").append(stack.stackTagCompound.getInteger("mask")).toString()));
-    }
+	list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + getVisDiscount(stack, player, null) + "%");
     super.addInformation(stack, player, list, par4);
   }
   
@@ -211,7 +206,7 @@ public class VoidMatrixArmor
 
   @Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-	  if(player.getCurrentArmor(2) != null &&!(player.getCurrentArmor(2).getItem() instanceof VoidMatrixArmor))
+	  if(player.getCurrentArmor(2) == null || player.getCurrentArmor(2).getItem() != ItemRegistry.voidMatrixChest)
 	  {
 		  return;
 	  }
@@ -226,12 +221,14 @@ public class VoidMatrixArmor
 		  VoidMatrixApi.drawMatrix(MatrixType.UNSTABLE, 2, player);
 		  player.addPotionEffect(new PotionEffect(12, 21, 0));
 	  }
-	  if(player.ticksExisted % 200 == 0 && itemStack.getItemDamage() != 0 && getCoreType(stack) != ElemCoreType.NEUTRAL && VoidMatrixApi.getMatrix(MatrixType.STABLE, player) >= 2)
+	  if(player.ticksExisted % 200 == 0 && itemStack.getItemDamage() != 0 && getCoreType(stack) != ElemCoreType.NEUTRAL && VoidMatrixApi.getMatrix(VoidMatrixApi.getMatrixTypeFromCoreType(getCoreType(stack)), player) >= 2)
 	  {
-		  VoidMatrixApi.drawMatrix(MatrixType.STABLE, 2, player);
+		  VoidMatrixApi.drawMatrix(VoidMatrixApi.getMatrixTypeFromCoreType(getCoreType(stack)), 2, player);
 		  itemStack.setItemDamage(itemStack.getItemDamage() - 1);
+		  
 	  }
 	}
+
   
   
   public ISpecialArmor.ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot)
@@ -279,8 +276,6 @@ public class VoidMatrixArmor
     }
     else if ((source.isFireDamage() == true) || (source.isExplosion()))
     {
-    	System.out.println(VoidMatrixApi.getMatrix(MatrixType.UNSTABLE, p) + ", damage: " + Math.ceil(damage));
-		
     	if(getCoreType(stack) == ElemCoreType.FIRE && VoidMatrixApi.getMatrix(MatrixType.UNSTABLE, p) >= Math.ceil(damage))
     	{
     		priority = 1;
@@ -313,9 +308,6 @@ public class VoidMatrixArmor
         if ((piece != null) && ((piece.getItem() instanceof VoidMatrixArmor)))
         {
           set += 0.125D;
-          if ((piece.hasTagCompound()) && (piece.stackTagCompound.hasKey("mask"))) {
-            set += 0.05D;
-          }
         }
       }
       ratio *= set;
@@ -329,17 +321,65 @@ public class VoidMatrixArmor
   
   public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot)
   {
+	  if(entity instanceof EntityPlayer)
+	  {
+		  EntityPlayer player = (EntityPlayer) entity;
+		  if(player.getCurrentArmor(2) != null && player.getCurrentArmor(2).getItem() == ItemRegistry.voidMatrixChest)
+		  {
+			  ItemStack chest = player.getCurrentArmor(2);
+			  switch(getCoreType(chest))
+			  {
+				case AIR:
+				{
+					if(source.isMagicDamage() || source.isProjectile())
+					{
+						return;
+					}
+					break;
+				}
+				case EARTH:
+				{
+					if(source == DamageSource.fall)
+					{
+						return;
+					}
+					break;
+				}
+				case FIRE:
+				{
+					if(source.isFireDamage() || source.isExplosion())
+					{
+						return;
+					}
+					break;
+				}
+				case NEUTRAL:
+				{
+					break;
+				}
+				case WATER:
+				{
+					if(source == DamageSource.drown)
+					{
+						return;
+					}
+					break;
+				}  
+			  }
+		  }
+	  }
+	  
 	 stack.damageItem(damage, entity);
   }
   
   public boolean showNodes(ItemStack itemstack, EntityLivingBase player)
   {
-    return true;
+    return itemstack.getItem() == ItemRegistry.voidMatrixHelm;
   }
   
   public boolean showIngamePopups(ItemStack itemstack, EntityLivingBase player)
   {
-    return true;
+	  return itemstack.getItem() == ItemRegistry.voidMatrixHelm;
   }
 
 @Override

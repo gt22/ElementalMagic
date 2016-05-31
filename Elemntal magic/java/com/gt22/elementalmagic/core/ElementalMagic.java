@@ -2,6 +2,7 @@ package com.gt22.elementalmagic.core;
 
 import net.minecraftforge.common.config.Configuration;
 
+import com.gt22.elementalmagic.command.ElemComands;
 import com.gt22.elementalmagic.config.CfgValues;
 import com.gt22.elementalmagic.creativetab.ElemTab;
 import com.gt22.elementalmagic.proxy.CommonProxy;
@@ -9,10 +10,11 @@ import com.gt22.elementalmagic.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 @Mod(version = ElementalMagic.version, modid = ElementalMagic.modid, name = ElementalMagic.name, dependencies = "required-after:Thaumcraft")
 public class ElementalMagic {
@@ -53,4 +55,11 @@ public class ElementalMagic {
 	{
 		proxy.postInit(e);
 	}
+	
+
+	  @EventHandler
+	  public void serverLoad(FMLServerStartingEvent event)
+	  {
+	    event.registerServerCommand(new ElemComands());
+	  }
 }

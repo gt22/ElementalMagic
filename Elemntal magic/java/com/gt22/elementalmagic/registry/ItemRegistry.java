@@ -87,7 +87,7 @@ public class ItemRegistry {
 		register(voidMatrixHelm = new VoidMatrixArmor("VoidMatrixHelm", Materials.armorMatVoidMatrixArmor, 4, 0));
 		register(voidMatrixChest = new VoidMatrixArmor("VoidMatrixChest", Materials.armorMatVoidMatrixArmor, 4, 1));
 		register(voidMatrixLegs = new VoidMatrixArmor("VoidMatrixLegs", Materials.armorMatVoidMatrixArmor, 4, 2));
-		register(elemAxe = new ElemAxe("ElemAxe"));
+		register(elemAxe = new ElemAxe("ElementalAxe"));
 		register(elemPick = new ElemPick("ElementalPick"));
 		register(elemShovel = new ElemShovel("ElementalShovel"));
 		register(elemSword = new ElemSword("ElementalSword"));

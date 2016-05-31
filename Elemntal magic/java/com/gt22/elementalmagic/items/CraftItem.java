@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import com.gt22.elementalmagic.config.CfgValues;
 import com.gt22.elementalmagic.core.ElementalMagic;
 import com.gt22.elementalmagic.registry.ArcaneRecipeRegistry;
+import com.gt22.elementalmagic.registry.BlockRegistry;
 import com.gt22.elementalmagic.registry.CrucibleRecipeRegistry;
 
 public class CraftItem extends Item {
@@ -93,10 +94,7 @@ public class CraftItem extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_,
 			EntityPlayer p_77659_3_) {
-		for(int i = 0; i < 5; i++)
-		{
-			System.out.println(ArcaneRecipeRegistry.tools[i]);
-		}
+		BlockRegistry.metalBlocks.printMetaWithNames();
 		return super.onItemRightClick(p_77659_1_, p_77659_2_, p_77659_3_);
 	}
 	

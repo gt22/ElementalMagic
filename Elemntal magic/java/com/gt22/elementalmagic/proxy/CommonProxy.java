@@ -9,7 +9,9 @@ import thaumcraft.api.research.ResearchCategoryList;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
 
+import com.gt22.elementalmagic.blocks.MetalBlock;
 import com.gt22.elementalmagic.registry.ArcaneRecipeRegistry;
+import com.gt22.elementalmagic.registry.BlockRegistry;
 import com.gt22.elementalmagic.registry.CrucibleRecipeRegistry;
 import com.gt22.elementalmagic.registry.InfusionRecipeRegistry;
 import com.gt22.elementalmagic.registry.ItemRegistry;
@@ -25,12 +27,12 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent e)
 	{
 		ItemRegistry.init();
-
+		BlockRegistry.init();
 	}
 	
 	public void init(FMLInitializationEvent e)
 	{
-		
+		MetalBlock.registerMetalBlocksRecipes();
 	}
 	
 	public void postInit(FMLPostInitializationEvent e)
