@@ -3,19 +3,19 @@ package com.gt22.elementalmagic.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
-import com.gt22.elementalmagic.registry.BlockRegistry;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
+
+import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.registry.BlockRegistry;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 
 public class MetalBlock extends Block{
@@ -23,6 +23,7 @@ public class MetalBlock extends Block{
 	public static int maxmeta = 0;
 	public static ArrayList <String> names = new ArrayList();
 	public static ArrayList<ItemStack> ingots = new ArrayList<ItemStack>();
+	public static ShapedRecipes[] recepies;
 	public MetalBlock() {
 		super(Material.iron);
 		setCreativeTab(ElementalMagic.tab);
@@ -30,9 +31,10 @@ public class MetalBlock extends Block{
 
 	public static void registerMetalBlocksRecipes()
 	{
+		recepies = new ShapedRecipes[maxmeta];
 		for(int i = 0; i < maxmeta; i++)
 		{
-			GameRegistry.addShapedRecipe(new ItemStack(BlockRegistry.metalBlocks, 1, i), 
+			recepies[i] = (ShapedRecipes) GameRegistry.addShapedRecipe(new ItemStack(BlockRegistry.metalBlocks, 1, i), 
 			"###",
 			"###",
 			"###",

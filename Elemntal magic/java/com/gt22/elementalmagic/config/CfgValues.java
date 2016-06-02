@@ -9,6 +9,7 @@ public class CfgValues {
 	public static int podzolID;
 	public static int mushroomID;
 	public static int lavaID;
+	public static boolean doNotReverseThePerl;
 	public static void init(Configuration cfg)
 	{
 		reverseID = cfg.getInt("reverse", "fociUpgrades", 45, 9, 9999, "Reverse upgradeID.");
@@ -17,6 +18,6 @@ public class CfgValues {
 		podzolID = cfg.getInt("podzol", "fociUpgrades", 48, 9, 9999, "Podzol upgradeID.");
 		mushroomID = cfg.getInt("mycelium", "fociUpgrades", 49, 9, 9999, "Mycelium upgradeID.");
 		lavaID = cfg.getInt("lava", "fociUpgrades", 50, 9, 9999, "Lava upgradeID.");
-		
+		doNotReverseThePerl = cfg.getBoolean("dnrtp", "events", true, "Enable Do not reverse the perl event");
 	}
 }

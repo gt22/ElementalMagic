@@ -1,5 +1,7 @@
 package com.gt22.elementalmagic.api;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -7,15 +9,150 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.ItemFocusBasic;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 public class AdvThaumApi {
 	
+	public static AspectList getPrimals(int amount)
+	{
+		return new AspectList().add(Aspect.AIR, amount).add(Aspect.EARTH, amount).add(Aspect.FIRE, amount).add(Aspect.WATER, amount).add(Aspect.ORDER, amount).add(Aspect.ENTROPY, amount);
+	}
+	
+	public static AspectList getElementas(int amount)
+	{
+		return new AspectList().add(Aspect.AIR, amount).add(Aspect.EARTH, amount).add(Aspect.FIRE, amount).add(Aspect.WATER, amount);
+	}
+	
+	public int visSize(AspectList al)
+	  {
+	    int q = 0;
+	    for (Aspect as : al.aspects.keySet()) {
+	      q += al.getAmount(as);
+	    }
+	    return q;
+	  }
+	
+	public static AspectList reduceToPrimals(AspectList al, boolean merge)
+	  {
+	    AspectList out = new AspectList();
+	    for (Aspect aspect : al.getAspects()) {
+	      if (aspect != null) {
+	        if (aspect.isPrimal())
+	        {
+	          if (merge) {
+	            out.merge(aspect, al.getAmount(aspect));
+	          } else {
+	            out.add(aspect, al.getAmount(aspect));
+	          }
+	        }
+	        else
+	        {
+	          AspectList send = new AspectList();
+	          send.add(aspect.getComponents()[0], al.getAmount(aspect));
+	          send.add(aspect.getComponents()[1], al.getAmount(aspect));
+	          send = reduceToPrimals(send, merge);
+	          for (Aspect a : send.getAspects()) {
+	            if (merge) {
+	              out.merge(a, send.getAmount(a));
+	            } else {
+	              out.add(a, send.getAmount(a));
+	            }
+	          }
+	        }
+	      }
+	    }
+	    return out;
+	  }
+	
 	private static final String wandpath = "thaumcraft.common.items.wands.ItemWandCasting";
+	//Thaumcraft.proxy.playerKnowledge.addAspectPool(player.getCommandSenderName(), aspect, (short)i);
+	//PacketHandler.INSTANCE.sendTo(new PacketAspectPool(this.table.aspect.getTag(), Short.valueOf((short)1), Short.valueOf(Thaumcraft.proxy.playerKnowledge.getAspectPoolFor(p.getCommandSenderName(), this.table.aspect))), (EntityPlayerMP)p);
+	public boolean giveAspect(EntityPlayer player, Aspect aspect, short amount)
+	{
+		try
+		{
+			SimpleNetworkWrapper instance = (SimpleNetworkWrapper) Class.forName("thaumcraft.common.lib.network.PacketHandler").getField("INSTANCE").get(this);
+			Field proxy = Class.forName("thaumcraft.common.Thaumcraft").getField("proxy");
+			Class <? extends IMessage> pap = (Class<? extends IMessage>) Class.forName("thaumcraft.common.lib.network.playerdata.PacketAspectPool");
+			Constructor <? extends IMessage> conspap = pap.getConstructor(String.class, Short.class, Short.class);
+			AspectList al = ThaumcraftApiHelper.getDiscoveredAspects(player.getCommandSenderName());
+			short value;
+			if(al != null)
+			{
+				value = (short) al.getAmount(aspect);
+			}
+			else
+			{
+				value = 0;
+			}
+			instance.sendTo(conspap.newInstance(aspect.getTag(), Short.valueOf((short) 1), Short.valueOf(value)), (EntityPlayerMP)player);
+			Class core = proxy.getDeclaringClass().getClass();
+			Field playerKnowledge = proxy.get(proxy.get(core)).getClass().getField("playerKnowledge");
+			Class  playerK = Class.forName("thaumcraft.common.lib.research.PlayerKnowledge");
+			Object pk = playerKnowledge.get(proxy.get(core));
+			Class[] params = 
+			{
+				String.class,
+				Aspect.class,
+				short.class,
+			};
+			Method add = pk.getClass().getMethod("addAspectPool", params);
+			return (boolean) add.invoke(pk, player.getCommandSenderName(), aspect, amount);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public void playWarpEffects(EntityPlayer player)
+	{
+		try
+		{
+			SimpleNetworkWrapper instance = (SimpleNetworkWrapper) Class.forName("thaumcraft.common.lib.network.PacketHandler").getField("INSTANCE").get(this);
+			Class <? extends IMessage> pmc = (Class<? extends IMessage>) Class.forName("thaumcraft.common.lib.network.misc.PacketMiscEvent");
+			Constructor <? extends IMessage> conspmc = pmc.getConstructor(short.class);
+			instance.sendTo(conspmc.newInstance((short)0), (EntityPlayerMP)player);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Unable to play warp effects");
+			e.printStackTrace();
+		}
+	}
+	public void compliteResearch(EntityPlayer player, String research)
+	{
+		try {
+				SimpleNetworkWrapper instance = (SimpleNetworkWrapper) Class.forName("thaumcraft.common.lib.network.PacketHandler").getField("INSTANCE").get(this);
+				Field proxy = Class.forName("thaumcraft.common.Thaumcraft").getField("proxy");
+				Class <? extends IMessage> prc = (Class<? extends IMessage>) Class.forName("thaumcraft.common.lib.network.playerdata.PacketResearchComplete");
+				Constructor <? extends IMessage> consprc = prc.getConstructor(String.class);
+				instance.sendTo(consprc.newInstance(research), (EntityPlayerMP)player);
+				Class clientproxy = Class.forName("thaumcraft.client.ClientProxy");
+				Field researchManag = proxy.get(clientproxy).getClass().getField("researchManager");
+				Class[] params = new Class[2];
+				params[0] = EntityPlayerMP.class;
+				params[1] = String.class;
+				Class resMan = Class.forName("thaumcraft.common.lib.research.ResearchManager");
+				Object resm = researchManag.get(clientproxy);
+				resm.getClass().getMethod("completeResearch", params).invoke(resm, (EntityPlayerMP)player, research);
+		} catch (Exception e) {
+			System.out.println("Unable to give research");
+			e.printStackTrace();
+			//Minecraft.getMinecraft().shutdown();
+		} 
+		
+		
+	}
 	
 	public static void setVis(ItemStack wand, AspectList aspects)
 	{

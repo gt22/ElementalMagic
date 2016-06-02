@@ -1,5 +1,7 @@
 package com.gt22.elementalmagic.registry;
 
+import com.gt22.elementalmagic.api.AdvThaumApi;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -12,6 +14,7 @@ import thaumcraft.api.crafting.ShapedArcaneRecipe;
 public class ArcaneRecipeRegistry {
 	public static ShapedArcaneRecipe windFoci, emberFoci, currentFoci, natureFoci, inertFoci, elemCap, elemPcik, elemSword, elemAxe, elemShovel, elemHoe;
 	public static ShapedArcaneRecipe[] tools;
+	public static ShapedArcaneRecipe boundMatrix;
 	public static void init(){
 		windFoci = ThaumcraftApi.addArcaneCraftingRecipe(
 		"windfocus",
@@ -67,7 +70,7 @@ public class ArcaneRecipeRegistry {
 		elemCap = ThaumcraftApi.addArcaneCraftingRecipe(
 		"CAP_ELEMCAP",
 		new ItemStack(ItemRegistry.elemCap),
-		new AspectList().add(ResearchRegistry.elems).add(ResearchRegistry.elems),
+		AdvThaumApi.getElementas(25),
 		"z1z",
 		"4c2",
 		"z3z",
@@ -85,7 +88,7 @@ public class ArcaneRecipeRegistry {
 			" x ",
 			" x ",
 			'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
-			'x', new ItemStack(ItemRegistry.craftItem, 1, 2));
+			'x', new ItemStack(Items.stick));
 		elemAxe = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
 				new ItemStack(ItemRegistry.elemAxe),
 				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
@@ -94,7 +97,7 @@ public class ArcaneRecipeRegistry {
 				"zx ",
 				" x ",
 				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
-				'x', new ItemStack(ItemRegistry.craftItem, 1, 2));
+				'x', new ItemStack(Items.stick));
 		elemHoe = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
 				new ItemStack(ItemRegistry.elemHoe),
 				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
@@ -103,7 +106,7 @@ public class ArcaneRecipeRegistry {
 				" x ",
 				" x ",
 				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
-				'x', new ItemStack(ItemRegistry.craftItem, 1, 2));
+				'x', new ItemStack(Items.stick));
 		elemSword = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
 				new ItemStack(ItemRegistry.elemSword),
 				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
@@ -111,7 +114,7 @@ public class ArcaneRecipeRegistry {
 				" z ",
 				" x ",
 				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
-				'x', new ItemStack(ItemRegistry.craftItem, 1, 2));
+				'x', new ItemStack(Items.stick));
 		elemShovel = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
 				new ItemStack(ItemRegistry.elemShovel),
 				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
@@ -120,14 +123,28 @@ public class ArcaneRecipeRegistry {
 				" x ",
 				" x ",
 				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
-				'x', new ItemStack(ItemRegistry.craftItem, 1, 2));
+				'x', new ItemStack(Items.stick));
 		tools = new ShapedArcaneRecipe[5];
 		tools[0] = elemPcik;
 		tools[1] = elemAxe;
 		tools[2] = elemShovel;
 		tools[3] = elemSword;
 		tools[4] = elemHoe;
-	}
+		
+		boundMatrix = ThaumcraftApi.addArcaneCraftingRecipe(
+		"autodecomp",
+		new ItemStack(ItemRegistry.boundMatrix),
+		AdvThaumApi.getElementas(35),
+		"#$#",
+		"%^&",
+		"#*#",
+		'#', ItemApi.getItem("itemResource", 2),
+		'$', ItemApi.getItem("itemZombieBrain", 0),
+		'%', ItemApi.getItem("itemResource", 15),
+		'^', new ItemStack(Items.emerald),
+		'&', ItemApi.getItem("itemResource", 10),
+		'*', new ItemStack(ItemRegistry.craftItem, 1, 1));
+		}
 	
 
 }

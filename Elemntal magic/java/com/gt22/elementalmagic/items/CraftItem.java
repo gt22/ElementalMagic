@@ -76,7 +76,7 @@ public class CraftItem extends Item {
 		@Override
 		public IIcon getIconFromDamage(int meta) {
 		    if (meta > maxmeta)
-		        meta = maxmeta;
+		        meta = 0;
 
 		    return icons[meta];
 		}
