@@ -50,6 +50,7 @@ public class ItemRegistry {
 		craftItem = new CraftItem();
 		craftItem.addCraftItem("InertFocus");
 		craftItem.addCraftItem("ElementalIngot");
+		craftItem.addCraftItem("ElementalShard");
 		register(craftItem);
 		register(elemRod = new ElementalRod("ElementalRod"));
 		register(elemCap = new ElementalCap("ElementalCap"));

@@ -1,9 +1,6 @@
 package com.gt22.elementalmagic.gui.gui;
 
-import java.util.Arrays;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -11,10 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.gt22.elementalmagic.core.ElementalMagic;
 import com.gt22.elementalmagic.gui.container.AutoDecompTableContainer;
+import com.gt22.elementalmagic.gui.container.HolderContainer;
 import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class AutoDecompTableGUI extends GuiContainer
 {

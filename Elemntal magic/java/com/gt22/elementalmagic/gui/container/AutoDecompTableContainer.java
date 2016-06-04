@@ -1,14 +1,15 @@
 package com.gt22.elementalmagic.gui.container;
 
-import com.gt22.elementalmagic.gui.slot.SlotBoundMatrix;
-import com.gt22.elementalmagic.registry.ItemRegistry;
-import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.gt22.elementalmagic.gui.slot.SlotBoundMatrix;
+import com.gt22.elementalmagic.registry.ItemRegistry;
+import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
+import com.gt22.elementalmagic.tiles.TileShardHolder;
 
 public class AutoDecompTableContainer extends Container {
 	
@@ -30,10 +31,7 @@ public class AutoDecompTableContainer extends Container {
 	        }
 	    }
 	    
-	    public int getBreakTime()
-	    {
-	    	return te.breaktime;
-	    }
+
 	    
 	    /*Standart look:
 	        @Override

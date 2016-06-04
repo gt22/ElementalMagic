@@ -8,6 +8,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EnumChatFormatting;
 
 public class ElemComands extends CommandBase {
 
@@ -21,41 +22,46 @@ public class ElemComands extends CommandBase {
 	    this.aliases.add("em");
 	  }
 	
+	  @Override
 	  public String getCommandName()
 	  {
 	    return "ElementalMagcic";
 	  }
 	  
+	  @Override
 	  public String getCommandUsage(ICommandSender icommandsender)
 	  {
 	    return "/ElementalMagcic <action> [<player> [<params>]]";
 	  }
 	  
+	  @Override
 	  public List getCommandAliases()
 	  {
 	    return this.aliases;
 	  }
 	  
+	  @Override
 	  public int getRequiredPermissionLevel()
 	  {
 	    return 2;
 	  }
 	  
-	  public List addTabCompletionOptions(ICommandSender icommandsender, String[] astring)
+	  @Override
+	  public List addTabCompletionOptions(ICommandSender icommandsender, String[] args)
 	  {
-		  switch(astring.length)
+		  switch(args.length)
 		  {
 			  case(1):
 			  {
-				  return getListOfStringsMatchingLastWord(astring, new String[] {"help"});
+				  return getListOfStringsMatchingLastWord(args, new String[] {"help"});
 			  }
 			  case(2):
 			  {
-				  return getListOfStringsMatchingLastWord(astring, new String[] {});
+				  return getListOfStringsMatchingLastWord(args, new String[] {});
 			  }
 			  case(3):
 			  {
-				  return getListOfStringsMatchingLastWord(astring, new String[] {});
+				  return getListOfStringsMatchingLastWord(args, new String[] {});
 			  }
 			  case(4):
 			  {
@@ -66,7 +72,7 @@ public class ElemComands extends CommandBase {
 					  ret[i] = players[i];
 				  }
 				  ret[players.length] = "me";
-				  return getListOfStringsMatchingLastWord(astring, ret);
+				  return getListOfStringsMatchingLastWord(args, ret);
 			  }
 		  }
 	    return null;
@@ -76,8 +82,8 @@ public class ElemComands extends CommandBase {
 	    {
 	        return MinecraftServer.getServer().getAllUsernames();
 	    }
-	  
-	  public boolean isUsernameIndex(String[] astring, int i)
+	    @Override
+	  public boolean isUsernameIndex(String[] args, int i)
 	  {
 	    return i == 1;
 	  }
@@ -89,7 +95,14 @@ public class ElemComands extends CommandBase {
 		{
 			if(args[3].equals("me"))
 			{
-				player = getCommandSenderAsPlayer(sender);
+				if(sender instanceof EntityPlayerMP)
+				{
+					player = getCommandSenderAsPlayer(sender);
+				}
+				else
+				{
+					sender.addChatMessage(new ChatComponentTranslation(EnumChatFormatting.DARK_RED + "Unable to run command with ''me'' from command block", new Object[0]));
+				}
 			}
 			else
 			{

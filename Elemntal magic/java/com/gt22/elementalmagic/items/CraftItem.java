@@ -91,11 +91,5 @@ public class CraftItem extends Item {
 	    return "item." + names.get(meta);
 	}
 	
-	@Override
-	public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_,
-			EntityPlayer p_77659_3_) {
-		BlockRegistry.metalBlocks.printMetaWithNames();
-		return super.onItemRightClick(p_77659_1_, p_77659_2_, p_77659_3_);
-	}
 	
 }

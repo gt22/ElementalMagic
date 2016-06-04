@@ -10,44 +10,44 @@ import thaumcraft.api.wands.IWandRodOnUpdate;
 
 public class ElementalRodOnUpd implements IWandRodOnUpdate {
 
+	
 	@Override
 	public void onUpdate(ItemStack itemstack, EntityPlayer player) {
 		if(!player.worldObj.isRemote && player.ticksExisted % 100 == 0)
 		{
-			AdvThaumApi.setVis(itemstack, new AspectList().add(Aspect.AIR, 7500).add(Aspect.EARTH, 7500).add(Aspect.WATER, 7500).add(Aspect.FIRE, 7500).add(Aspect.ORDER, 7500).add(Aspect.ENTROPY, 7500));
-			/*if(AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100 < 74)
+			if(AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100 < AdvThaumApi.getMaxVis(itemstack) - 1)
 			{	
 				AdvThaumApi.insertVis(itemstack, Aspect.FIRE, 1, true);
 			}
-			else if (AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100 < 75)
+			else if (AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100 < AdvThaumApi.getMaxVis(itemstack))
 			{
-				AdvThaumApi.insertVis(itemstack, Aspect.FIRE, 75 - AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100, true);
+				AdvThaumApi.insertVis(itemstack, Aspect.FIRE, AdvThaumApi.getMaxVis(itemstack) - AdvThaumApi.getVis(itemstack, Aspect.FIRE) / 100, true);
 			}
-			if(AdvThaumApi.getVis(itemstack, Aspect.EARTH) / 100 < 74)
+			if(AdvThaumApi.getVis(itemstack, Aspect.EARTH) / 100 < AdvThaumApi.getMaxVis(itemstack) - 1)
 			{	
 				AdvThaumApi.insertVis(itemstack, Aspect.EARTH, 1, true);
 			}
-			else if (AdvThaumApi.getVis(itemstack, Aspect.EARTH) / 100 < 75)
+			else if (AdvThaumApi.getVis(itemstack, Aspect.EARTH) / 100 < AdvThaumApi.getMaxVis(itemstack))
 			{
-				AdvThaumApi.insertVis(itemstack, Aspect.EARTH, 75 - AdvThaumApi.getVis(itemstack, Aspect.EARTH) / 100, true);
+				AdvThaumApi.insertVis(itemstack, Aspect.EARTH, AdvThaumApi.getMaxVis(itemstack) - AdvThaumApi.getVis(itemstack, Aspect.EARTH) / 100, true);
 			}
-			if(AdvThaumApi.getVis(itemstack, Aspect.AIR) / 100 < 74)
+			if(AdvThaumApi.getVis(itemstack, Aspect.AIR) / 100 < AdvThaumApi.getMaxVis(itemstack) - 1)
 			{	
 				AdvThaumApi.insertVis(itemstack, Aspect.AIR, 1, true);
 			}
-			else if (AdvThaumApi.getVis(itemstack, Aspect.AIR) / 100 < 75)
+			else if (AdvThaumApi.getVis(itemstack, Aspect.AIR) / 100 < AdvThaumApi.getMaxVis(itemstack))
 			{
-				AdvThaumApi.insertVis(itemstack, Aspect.AIR, 75 - AdvThaumApi.getVis(itemstack, Aspect.AIR) / 100, true);
+				AdvThaumApi.insertVis(itemstack, Aspect.AIR, AdvThaumApi.getMaxVis(itemstack) - AdvThaumApi.getVis(itemstack, Aspect.AIR) / 100, true);
 			}
-			if(AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100 < 74)
+			if(AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100 < AdvThaumApi.getMaxVis(itemstack) - 1)
 			{	
 				AdvThaumApi.insertVis(itemstack, Aspect.WATER, 1, true);
 			}
-			else if (AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100 < 75)
+			else if (AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100 < AdvThaumApi.getMaxVis(itemstack))
 			{
-				AdvThaumApi.insertVis(itemstack, Aspect.WATER, 75 - AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100, true);
+				AdvThaumApi.insertVis(itemstack, Aspect.WATER, AdvThaumApi.getMaxVis(itemstack) - AdvThaumApi.getVis(itemstack, Aspect.WATER) / 100, true);
 			}
-			AdvThaumApi.setVis(itemstack, new AspectList().add(Aspect.ORDER, 0).add(Aspect.ENTROPY, 0));*/
+			AdvThaumApi.setVis(itemstack, new AspectList().add(Aspect.ORDER, 0).add(Aspect.ENTROPY, 0));
 		}
 		
 	}
