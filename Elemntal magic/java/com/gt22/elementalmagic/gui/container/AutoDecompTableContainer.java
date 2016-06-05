@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import com.gt22.elementalmagic.gui.slot.SlotBoundMatrix;
 import com.gt22.elementalmagic.registry.ItemRegistry;
 import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
-import com.gt22.elementalmagic.tiles.TileShardHolder;
 
 public class AutoDecompTableContainer extends Container {
 	

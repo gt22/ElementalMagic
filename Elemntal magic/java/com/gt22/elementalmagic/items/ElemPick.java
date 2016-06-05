@@ -1,13 +1,13 @@
 package com.gt22.elementalmagic.items;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
-import com.gt22.elementalmagic.registry.Materials;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
+import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.registry.Materials;
 
 public class ElemPick extends ItemPickaxe {
 

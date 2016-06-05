@@ -1,35 +1,46 @@
 package com.gt22.elementalmagic.tiles;
 
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.visnet.VisNetHandler;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import com.gt22.elementalmagic.blocks.MetalBlock;
-import com.gt22.elementalmagic.enums.EnumElementalizerInputs;
-import com.gt22.elementalmagic.registry.BlockRegistry;
-import com.gt22.elementalmagic.registry.ItemRegistry;
-
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import thaumcraft.api.ItemApi;
+import thaumcraft.api.aspects.Aspect;
+
+import com.gt22.elementalmagic.api.ElementalizerApi;
+import com.gt22.elementalmagic.api.ElementalizerRecepie;
+import com.gt22.elementalmagic.blocks.Elementalizer;
+import com.gt22.elementalmagic.registry.BlockRegistry;
+import com.gt22.elementalmagic.registry.ItemRegistry;
 
 public class TileElementalizer extends TileEntity implements IInventory {
-
-	
+	public static ArrayList<ElementalizerRecepie> recepies = new ArrayList<ElementalizerRecepie>();
 	private int checktime;
-	ItemStack[] shards = null;
+	boolean shards = false;
+	
 	@Override
 	public void updateEntity() {
 		if(!worldObj.isRemote)
 		{
-			
 			if(checktime == 0)
 			{
-				if(MetalBlock.checkHolders(worldObj, xCoord, yCoord, zCoord) == null)
+				if(Elementalizer.checkHolders(worldObj, xCoord, yCoord, zCoord) == null)
 				{
+					for(int i = 0; i < getSizeInventory(); i++)
+					{
+						if(getStackInSlot(i) !=  null)
+						{
+							ItemStack stack = getStackInSlot(i);
+							EntityItem item = new EntityItem(worldObj, xCoord, yCoord, zCoord, stack);
+							worldObj.spawnEntityInWorld(item);
+						}
+					}
 					worldObj.setBlock(xCoord, yCoord, zCoord, BlockRegistry.metalBlocks);
 					worldObj.removeTileEntity(xCoord, yCoord, zCoord);
 				}
@@ -39,52 +50,92 @@ public class TileElementalizer extends TileEntity implements IInventory {
 			else
 			{
 				checktime--;
-				if(shards != null)
+				if(shards)
 				{
 					processItem();
+				}
+				else
+				{
+					reqvis = null;
 				}
 			}
 		}
 	}
+	
+	public ElementalizerRecepie getRecepie(ItemStack input)
+	{
+		for(ElementalizerRecepie r : recepies)
+		{
+			if(r.input.getItem() == input.getItem() && r.input.getItemDamage() == input.getItemDamage())
+			{
+				return r;
+			}
+		}
+		return null;
+	}
+	
 	private int[] reqvis = new int[4];
 	private void processItem()
 	{
-		ItemStack input, output;
-		EnumElementalizerInputs recepie;
-		input = getStackInSlot(0);
-		if(input != null)
+		if(shards)
 		{
-				recepie = EnumElementalizerInputs.getByInputStack(input);
-				if(recepie == null)
-				{
-					System.out.println("invalid input");
-					return;
-				}
-				output = recepie.output;
-			if(reqvis == null)
-			{
-				reqvis = recepie.cost;
-			}
-			reqvis[0] -= VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, Aspect.AIR, reqvis[0]);
-			reqvis[1] -= VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, Aspect.WATER, reqvis[1]);
-			reqvis[2] -= VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, Aspect.FIRE, reqvis[2]);
-			reqvis[3] -= VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, Aspect.EARTH, reqvis[3]);
-			System.out.println("Air: " + reqvis[0]);
-			System.out.println("Aqua: " + reqvis[1]);
-			System.out.println("Ignis: " + reqvis[2]);
-			System.out.println("Terra: " + reqvis[3]);
-			boolean empty = true;
-			for(int i = 0; i < 4; i++)
-			{
-				if(reqvis[i] != 0)
-				{
-					empty = false;
-				}
-			}
-			if(empty)
+			ItemStack input, output;
+			input = getStackInSlot(0);
+			if(input == null)
 			{
 				reqvis = null;
-				setInventorySlotContents(0, output);
+				return;
+			}
+			if(getRecepie(input) != null)
+			{
+				ElementalizerRecepie recepie = getRecepie(input);
+					
+					output = recepie.output;
+				if(reqvis == null)
+				{
+					reqvis = recepie.cost;
+				}
+				Aspect[] aspects = {
+					Aspect.AIR,
+					Aspect.FIRE,
+					Aspect.WATER,
+					Aspect.EARTH
+				};
+				TileShardHolder[] holders = Elementalizer.checkHolders(worldObj, xCoord, yCoord, zCoord);
+				for(int i = 0; i < reqvis.length; i++)
+				{
+					if(shards && holders[i] != null)
+					{
+						reqvis[i] -= holders[i].drawVis(aspects[holders[i].getStackInSlot(0).getItemDamage()], reqvis[i]);
+					}
+					else
+					{
+						reqvis = null;
+						return;
+					}
+				}
+				System.out.println("Air: " + reqvis[0]);
+				System.out.println("Aqua: " + reqvis[1]);
+				System.out.println("Ignis: " + reqvis[2]);
+				System.out.println("Terra: " + reqvis[3]);
+				boolean empty = true;
+				for(int i = 0; i < 4; i++)
+				{
+					if(reqvis[i] != 0)
+					{
+						empty = false;
+					}
+				}
+				if(empty)
+				{
+					reqvis = null;
+					setInventorySlotContents(0, null);
+					setInventorySlotContents(1, output);
+				}
+			}
+			else
+			{
+				reqvis = null;
 			}
 		}
 		else
@@ -93,9 +144,9 @@ public class TileElementalizer extends TileEntity implements IInventory {
 		}
 	}
 	
-	public ItemStack[] getShards()
+	public boolean getShards()
 	{
-		TileShardHolder[] holders = MetalBlock.checkHolders(worldObj, xCoord, yCoord, zCoord);
+		TileShardHolder[] holders = Elementalizer.checkHolders(worldObj, xCoord, yCoord, zCoord);
 		if(holders != null)
 		{
 			ItemStack[] shards = new ItemStack[4];
@@ -103,36 +154,40 @@ public class TileElementalizer extends TileEntity implements IInventory {
 			{
 				shards[i] = holders[i].getStackInSlot(0);
 			}
-			ItemStack[] ret = new ItemStack[4];
+			ArrayList<ItemStack> shardlist = new ArrayList<ItemStack>();
 			for(int i = 0; i < 4; i++)
 			{
-				for(int j = 0; j < 4; j++)
+				for(int j = 0; j < shardlist.size(); j++)
 				{
-					if(shards[j] == null)
+					if(shards[i] == null || shards[i].getItemDamage() == shardlist.get(j).getItemDamage())
 					{
-						return null;
-					}
-					if(shards[j].getItemDamage() == i)
-					{
-						ret[i] = shards[j];
+						return false;
 					}
 				}
+				shardlist.add(shards[i]);
 			}
-			for(int i = 0; i < 4; i++)
-			{
-				if(shards[i] == null || shards[i].getItemDamage() != i)
-				{
-					System.out.println("duplication: i: " + i + " meta: " + shards[i].getItemDamage());
-					return null;
-				}
-			}
-			return ret;
+			return shardlist.size() == 4;
 		}
-		return null;
+		return false;
 	}
 	
 	public TileElementalizer() {
 		inventory = new ItemStack[getSizeInventory()];
+		if(getRecepie(ItemApi.getItem("itemResource", 2)) == null) //If thaumium recepie not registered we need to register standar recepies
+		{
+			System.out.println("registering");
+			registerStandartRecepies();
+		}
+	}
+	
+	private static void registerStandartRecepies()
+	{
+		ElementalizerApi.addRecepie(new ElementalizerRecepie(ItemApi.getItem("itemResource", 2), new ItemStack(ItemRegistry.craftItem, 1, 1), 10000, 10000, 10000, 10000));
+		ElementalizerApi.addRecepie(new ElementalizerRecepie(ItemApi.getItem("itemShard", 0), new ItemStack(ItemRegistry.craftItem, 1, 2), 0, 10000, 10000, 10000));
+		ElementalizerApi.addRecepie(new ElementalizerRecepie(ItemApi.getItem("itemShard", 1), new ItemStack(ItemRegistry.craftItem, 1, 2), 10000, 0, 10000, 10000));
+		ElementalizerApi.addRecepie(new ElementalizerRecepie(ItemApi.getItem("itemShard", 2), new ItemStack(ItemRegistry.craftItem, 1, 2), 10000, 10000, 0, 10000));
+		ElementalizerApi.addRecepie(new ElementalizerRecepie(ItemApi.getItem("itemShard", 3), new ItemStack(ItemRegistry.craftItem, 1, 2), 10000, 10000, 10000, 0));
+		
 	}
 	
 	public ItemStack[] inventory;
@@ -195,7 +250,7 @@ public class TileElementalizer extends TileEntity implements IInventory {
 
 	@Override
 	public String getInventoryName() {
-		return "AutoDecompTable";
+		return "Elementalizer";
 	}
 
 	@Override
@@ -225,19 +280,7 @@ public class TileElementalizer extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		if(index == 0)
-		{
-			AspectList al = new AspectList(stack);
-			if(al != null && al.size() > 0)
-			{
-				return true;
-			}
-		}
-		else if(index == 1)
-		{
-			return stack.getItem() == ItemRegistry.boundMatrix;
-		}
-		return false;
+		return index == 0;
 	}
 	
 	@Override
@@ -269,12 +312,12 @@ public class TileElementalizer extends TileEntity implements IInventory {
 	        int slot = stackTag.getByte("Slot") & 255;
 	        this.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(stackTag));
 	    }
-	    nbt.getIntArray("vis");
+	    reqvis = nbt.getIntArray("vis");
 	}
 
 	@Override
 	public int getSizeInventory() {
-		return 1;
+		return 2;
 	}
 
 }

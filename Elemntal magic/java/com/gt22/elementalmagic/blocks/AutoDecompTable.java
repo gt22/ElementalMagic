@@ -1,14 +1,14 @@
 package com.gt22.elementalmagic.blocks;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
-import com.gt22.elementalmagic.handler.GuiHandler;
-import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.gui.GuiHandler;
+import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
 
 public class AutoDecompTable extends BlockContainer
 {

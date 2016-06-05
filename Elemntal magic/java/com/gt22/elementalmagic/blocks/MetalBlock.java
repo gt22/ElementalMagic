@@ -3,8 +3,6 @@ package com.gt22.elementalmagic.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import thaumcraft.api.ThaumcraftApiHelper;
-import thaumcraft.api.wands.IWandable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,14 +11,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import thaumcraft.api.ThaumcraftApiHelper;
+import thaumcraft.api.wands.IWandable;
 
 import com.gt22.elementalmagic.api.AdvThaumApi;
 import com.gt22.elementalmagic.core.ElementalMagic;
 import com.gt22.elementalmagic.registry.BlockRegistry;
-import com.gt22.elementalmagic.tiles.TileShardHolder;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -116,7 +114,7 @@ public class MetalBlock extends Block implements IWandable
 	@Override
 	public int onWandRightClick(World world, ItemStack wandstack,
 			EntityPlayer player, int x, int y, int z, int side, int md) {
-		if(md == 0 && checkHolders(world, x, y, z) != null && ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, AdvThaumApi.getElementas(50), false, false))
+		if(md == 0 && Elementalizer.checkHolders(world, x, y, z) != null && ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, AdvThaumApi.getElementas(50), false, false))
 		{
 			ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, AdvThaumApi.getElementas(5000), true, false);
 			world.setBlock(x, y, z, BlockRegistry.elementalizer);
@@ -125,26 +123,7 @@ public class MetalBlock extends Block implements IWandable
 		return -1;
 	}
 	
-	public static TileShardHolder[] checkHolders(World world, int x, int y, int z)
-	{
-		TileEntity[] holders = new TileShardHolder[4];
-		if(world.getTileEntity(x - 3, y, z) != null)
-			holders[0] = world.getTileEntity(x - 3, y, z);
-		if(world.getTileEntity(x + 3, y, z) != null)	
-			holders[1] = world.getTileEntity(x + 3, y, z);
-		if(world.getTileEntity(x, y, z - 3) != null)	
-			holders[2] = world.getTileEntity(x, y, z - 3);
-		if(world.getTileEntity(x, y, z + 3) != null)
-			holders[3] = world.getTileEntity(x, y, z + 3);
-		for(int i  = 0; i < holders.length; i++)
-		{
-			if(holders == null || !(holders[i] instanceof TileShardHolder))
-			{
-				return null;
-			}
-		}
-		return (TileShardHolder[]) holders;
-	}
+	
 
 	@Override
 	public ItemStack onWandRightClick(World world, ItemStack wandstack,

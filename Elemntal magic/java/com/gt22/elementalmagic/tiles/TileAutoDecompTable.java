@@ -13,6 +13,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
 import com.gt22.elementalmagic.api.AdvThaumApi;
+import com.gt22.elementalmagic.config.CfgValues;
 import com.gt22.elementalmagic.registry.ItemRegistry;
 
 import cpw.mods.fml.relauncher.Side;
@@ -94,7 +95,7 @@ public class TileAutoDecompTable extends TileEntity implements IInventory {
 		      {
 		    	  	if(player.getDistanceSq(xCoord, yCoord, zCoord) > 100)
 		    	  	{
-		    	  		if(worldObj.rand.nextInt(500) > player.getDistance(xCoord, yCoord, zCoord))
+		    	  		if(worldObj.rand.nextInt(CfgValues.autoDecompRange) > player.getDistance(xCoord, yCoord, zCoord))
 		    	  		{
 		    	  			api.giveAspect(player, primal, (short)1);
 		    	  		}

@@ -1,17 +1,14 @@
 package com.gt22.elementalmagic.gui.container;
 
-import thaumcraft.api.ItemApi;
-
-import com.gt22.elementalmagic.gui.slot.SlotBoundMatrix;
-import com.gt22.elementalmagic.registry.ItemRegistry;
-import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
-import com.gt22.elementalmagic.tiles.TileShardHolder;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import thaumcraft.api.ItemApi;
+
+import com.gt22.elementalmagic.gui.slot.ShardSlot;
+import com.gt22.elementalmagic.tiles.TileShardHolder;
 
 public class HolderContainer extends Container {
 	
@@ -20,7 +17,7 @@ public class HolderContainer extends Container {
 	    public HolderContainer(IInventory playerInv, TileShardHolder te) {
 	        this.te = te;
 	        
-	        this.addSlotToContainer(new Slot(te, 0, 80, 24));
+	        this.addSlotToContainer(new ShardSlot(te, 0, 80, 24));
 	        for (int y = 0; y < 3; ++y) {
 	            for (int x = 0; x < 9; ++x) {
 	                this.addSlotToContainer(new Slot(playerInv, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
@@ -32,7 +29,6 @@ public class HolderContainer extends Container {
 	        }
 	    }
 	    
-
 	    
 	    /*Standart look:
 	        @Override
@@ -73,7 +69,7 @@ public class HolderContainer extends Container {
 		                    return null;
 		            } else {	            		
 		            		if (!this.mergeItemStack(current, 0, 1, false))
-		            			if (current.getItem() == ItemApi.getItem("itemShard", 0).getItem())
+		            			if (current.getItem() == ItemApi.getItem("itemShard", 0).getItem() && current.getItemDamage() < 4)
 		            				if(!this.mergeItemStack(current, 1, 2, false))
 		            					return null;
 		            }

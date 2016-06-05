@@ -1,7 +1,5 @@
 package com.gt22.elementalmagic.registry;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -10,6 +8,8 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
+
+import com.gt22.elementalmagic.api.AdvThaumApi;
 
 public class ArcaneRecipeRegistry {
 	public static ShapedArcaneRecipe windFoci, emberFoci, currentFoci, natureFoci, inertFoci, elemCap, elemPcik, elemSword, elemAxe, elemShovel, elemHoe;

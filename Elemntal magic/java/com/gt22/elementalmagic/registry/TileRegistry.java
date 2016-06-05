@@ -1,13 +1,12 @@
 package com.gt22.elementalmagic.registry;
 
-import scala.tools.nsc.transform.patmat.MatchOptimization.SwitchEmission.RegularSwitchMaker;
+import net.minecraft.tileentity.TileEntity;
 
 import com.gt22.elementalmagic.core.ElementalMagic;
 import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
 import com.gt22.elementalmagic.tiles.TileElementalizer;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
 
-import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TileRegistry

@@ -2,7 +2,7 @@ package com.gt22.elementalmagic.proxy;
 
 import com.gt22.elementalmagic.blocks.MetalBlock;
 import com.gt22.elementalmagic.core.ElementalMagic;
-import com.gt22.elementalmagic.handler.GuiHandler;
+import com.gt22.elementalmagic.gui.GuiHandler;
 import com.gt22.elementalmagic.registry.ArcaneRecipeRegistry;
 import com.gt22.elementalmagic.registry.BlockRegistry;
 import com.gt22.elementalmagic.registry.CrucibleRecipeRegistry;

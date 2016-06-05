@@ -8,7 +8,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.gt22.elementalmagic.core.ElementalMagic;
 import com.gt22.elementalmagic.gui.container.AutoDecompTableContainer;
-import com.gt22.elementalmagic.gui.container.HolderContainer;
 import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
 
 public class AutoDecompTableGUI extends GuiContainer

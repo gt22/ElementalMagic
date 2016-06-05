@@ -9,7 +9,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import thaumcraft.api.ItemApi;
+import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.visnet.VisNetHandler;
 
 import com.gt22.elementalmagic.registry.ItemRegistry;
 
@@ -21,7 +24,13 @@ public class TileShardHolder extends TileEntity implements IInventory {
 		inventory = new ItemStack[getSizeInventory()];
 	}
 	
+	public int drawVis(Aspect aspect, int amount)
+	{
+		return VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, aspect, amount);
+	}
+	
 	public ItemStack[] inventory;
+	
 	@Override
 	public ItemStack getStackInSlot(int index) {
 		if (index < 0 || index >= this.getSizeInventory())
@@ -61,31 +70,18 @@ public class TileShardHolder extends TileEntity implements IInventory {
 	 public Packet getDescriptionPacket()
 	 {
 		 NBTTagCompound syncData = new NBTTagCompound();
-		 this.writeSyncableDataToNBT(syncData);
+		 this.writeToNBT(syncData);
 	     return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, syncData);
 	 }
 	
-	 private void writeSyncableDataToNBT(NBTTagCompound nbt) {
-		 if(getStackInSlot(0) != null)
-			 getStackInSlot(0).writeToNBT(nbt);
-		 else
-			 nbt = null;
-		
-	}
 
 	@Override
 	 public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	 {
-	     readSyncableDataFromNBT(pkt.func_148857_g());
+	     readFromNBT(pkt.func_148857_g());
 	 }
 	
 	 
-	 
-	private void readSyncableDataFromNBT(NBTTagCompound nbt) {
-		if(nbt != null)
-			setInventorySlotContents(0, ItemStack.loadItemStackFromNBT(nbt));
-		
-	}
 
 	@Override
 	public void updateEntity() {
@@ -146,17 +142,9 @@ public class TileShardHolder extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		if(index == 0)
+		if(stack.getItem() == ItemApi.getItem("itemShard", 0).getItem() && stack.getItemDamage() < 4)
 		{
-			AspectList al = new AspectList(stack);
-			if(al != null && al.size() > 0)
-			{
-				return true;
-			}
-		}
-		else if(index == 1)
-		{
-			return stack.getItem() == ItemRegistry.boundMatrix;
+			return true;
 		}
 		return false;
 	}

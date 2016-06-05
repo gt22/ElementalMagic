@@ -4,11 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -41,12 +38,39 @@ public class ShardHolderRender extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) { 
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F); 
-		ResourceLocation textures = (new ResourceLocation(ElementalMagic.modid, "models/HolderTextrue.png"));
+		String texturename = "models/HolderTextrue";
+		TileShardHolder holder = (TileShardHolder) te;
+		if(holder.getStackInSlot(0) != null)
+		{
+			switch(holder.getStackInSlot(0).getItemDamage())
+	           {
+		           case(0)://Air
+		           {
+		        	   texturename += "Air";
+		        	   break;
+		           }
+		           case(1)://Fire
+		           {
+		        	   texturename += "Fire";
+		        	   break;
+		           }
+		           case(2)://Water
+		           {
+		        	   texturename += "Water";
+		        	   break;
+		           }
+		           case(3)://Earth
+		           {
+		        	   texturename += "Earth";
+		        	   break;
+		           }
+	           }
+		}
+		ResourceLocation textures = (new ResourceLocation(ElementalMagic.modid, texturename + ".png"));
 		Minecraft.getMinecraft().renderEngine.bindTexture(textures);
 		GL11.glPushMatrix();
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F); 
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-		TileShardHolder holder = (TileShardHolder) te;
 		GL11.glPushMatrix();
 		
         if (holder.getStackInSlot(0) != null)

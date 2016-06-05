@@ -1,12 +1,12 @@
 package com.gt22.elementalmagic.wands;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.IWandRodOnUpdate;
+
+import com.gt22.elementalmagic.api.AdvThaumApi;
 
 public class ElementalRodOnUpd implements IWandRodOnUpdate {
 

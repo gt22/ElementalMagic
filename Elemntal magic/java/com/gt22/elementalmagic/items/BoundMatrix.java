@@ -1,17 +1,12 @@
 package com.gt22.elementalmagic.items;
 
-import java.io.IOException;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTSizeTracker;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.gt22.elementalmagic.command.ElemComands;
 import com.gt22.elementalmagic.core.ElementalMagic;
 import com.gt22.elementalmagic.items.nbt.ItemNbt;
 
@@ -22,6 +17,7 @@ public class BoundMatrix extends Item
 		setCreativeTab(ElementalMagic.tab);
 		setUnlocalizedName(unlocName);
 		setTextureName(ElementalMagic.modid + ":" + unlocName);
+		setMaxStackSize(1);
 	}
 	
 	@Override

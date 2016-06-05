@@ -1,18 +1,16 @@
 package com.gt22.elementalmagic.registry;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
-import com.gt22.elementalmagic.blocks.MetalBlock;
-import com.gt22.elementalmagic.config.CfgValues;
-import com.gt22.elementalmagic.core.ElementalMagic;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
+
+import com.gt22.elementalmagic.api.AdvThaumApi;
+import com.gt22.elementalmagic.blocks.MetalBlock;
+import com.gt22.elementalmagic.core.ElementalMagic;
 
 public class ResearchRegistry {
 	public static final String tabname = "ELEMENTALMAGIC";

@@ -1,10 +1,10 @@
 package com.gt22.elementalmagic.gui.slot;
 
-import com.gt22.elementalmagic.registry.ItemRegistry;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.gt22.elementalmagic.registry.ItemRegistry;
 
 public class SlotBoundMatrix extends Slot
 {

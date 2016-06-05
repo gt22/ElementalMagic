@@ -1,4 +1,7 @@
-package com.gt22.elementalmagic.handler;
+package com.gt22.elementalmagic.gui;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
 import com.gt22.elementalmagic.gui.container.AutoDecompTableContainer;
 import com.gt22.elementalmagic.gui.container.HolderContainer;
@@ -7,8 +10,6 @@ import com.gt22.elementalmagic.gui.gui.HolderGUI;
 import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler

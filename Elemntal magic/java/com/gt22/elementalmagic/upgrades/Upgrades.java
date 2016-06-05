@@ -1,12 +1,11 @@
 package com.gt22.elementalmagic.upgrades;
 
-import com.gt22.elementalmagic.config.CfgValues;
-import com.gt22.elementalmagic.core.ElementalMagic;
-
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
+
+import com.gt22.elementalmagic.config.CfgValues;
 
 public class Upgrades {
 	public static FocusUpgradeType reverse = new FocusUpgradeType(CfgValues.reverseID, new ResourceLocation("thaumcraft", "textures/aspects/permutatio.png"), "em.upgrade.reverse", "em.upgrade.reverse.text", new AspectList().add(Aspect.EXCHANGE, 1).add(Aspect.AURA, 1));

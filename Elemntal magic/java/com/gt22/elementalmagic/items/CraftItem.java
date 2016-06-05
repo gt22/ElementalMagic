@@ -5,17 +5,11 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 
-import com.gt22.elementalmagic.config.CfgValues;
 import com.gt22.elementalmagic.core.ElementalMagic;
-import com.gt22.elementalmagic.registry.ArcaneRecipeRegistry;
-import com.gt22.elementalmagic.registry.BlockRegistry;
-import com.gt22.elementalmagic.registry.CrucibleRecipeRegistry;
 
 public class CraftItem extends Item {
 	

@@ -1,23 +1,15 @@
 package com.gt22.elementalmagic.blocks;
 
-import thaumcraft.api.ItemApi;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.gt22.elementalmagic.core.ElementalMagic;
-import com.gt22.elementalmagic.handler.GuiHandler;
+import com.gt22.elementalmagic.gui.GuiHandler;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
-
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 
 public class ShardHolder extends BlockContainer {
 

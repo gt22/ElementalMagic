@@ -1,7 +1,5 @@
 package com.gt22.elementalmagic.items;
 
-import java.awt.Color;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemAxe;
@@ -11,8 +9,6 @@ import net.minecraft.world.World;
 import com.gt22.elementalmagic.api.AdvThaumApi;
 import com.gt22.elementalmagic.core.ElementalMagic;
 import com.gt22.elementalmagic.registry.Materials;
-
-import cpw.mods.fml.common.network.NetworkRegistry;
 
 public class ElemAxe extends ItemAxe {
 

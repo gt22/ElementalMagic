@@ -21,25 +21,32 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 public class AdvThaumApi {
 	
+	/**
+	 * Return aspect list of primals with the given amount
+	 * @param amount
+	 * @return
+	 */
 	public static AspectList getPrimals(int amount)
 	{
 		return new AspectList().add(Aspect.AIR, amount).add(Aspect.EARTH, amount).add(Aspect.FIRE, amount).add(Aspect.WATER, amount).add(Aspect.ORDER, amount).add(Aspect.ENTROPY, amount);
 	}
 	
+	/**
+	 * Works just like {@link #getPrimas()}, but returns only elemental primals (Aer, terra, ignis, aqua). Used in ElementalMagic
+	 * @param amount
+	 * @return
+	 */
 	public static AspectList getElementas(int amount)
 	{
 		return new AspectList().add(Aspect.AIR, amount).add(Aspect.EARTH, amount).add(Aspect.FIRE, amount).add(Aspect.WATER, amount);
 	}
 	
-	public int visSize(AspectList al)
-	  {
-	    int q = 0;
-	    for (Aspect as : al.aspects.keySet()) {
-	      q += al.getAmount(as);
-	    }
-	    return q;
-	  }
-	
+	/**
+	 * Return aspect list of primals getted by splitting another aspect list
+	 * @param al List to reduce
+	 * @param merge If true will use <code>merge</code> method instead of <code>add</code>, this method use only highrs of the amounts. <code>{@link AspectList#merge(Aspect, int)}</code>
+	 * @return AspectList of primal aspects
+	 */
 	public static AspectList reduceToPrimals(AspectList al, boolean merge)
 	  {
 	    AspectList out = new AspectList();
@@ -73,8 +80,14 @@ public class AdvThaumApi {
 	  }
 	
 	private static final String wandpath = "thaumcraft.common.items.wands.ItemWandCasting";
-	//Thaumcraft.proxy.playerKnowledge.addAspectPool(player.getCommandSenderName(), aspect, (short)i);
-	//PacketHandler.INSTANCE.sendTo(new PacketAspectPool(this.table.aspect.getTag(), Short.valueOf((short)1), Short.valueOf(Thaumcraft.proxy.playerKnowledge.getAspectPoolFor(p.getCommandSenderName(), this.table.aspect))), (EntityPlayerMP)p);
+	
+	/**
+	 * Add an research points to player, also render visual effect (Aspect flying to thaumonomicon)
+	 * @param player to give research
+	 * @param aspect to give
+	 * @param amount to give, can be negative
+	 * @return true if aspect was succesfully added/removed
+	 */
 	public boolean giveAspect(EntityPlayer player, Aspect aspect, short amount)
 	{
 		try
@@ -114,6 +127,10 @@ public class AdvThaumApi {
 		return false;
 	}
 	
+	/**
+	 * Play visual warp effects for player
+	 * @param player to play warp effects
+	 */
 	public void playWarpEffects(EntityPlayer player)
 	{
 		try
@@ -129,6 +146,12 @@ public class AdvThaumApi {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Complite resesarch for player
+	 * @param player to complite
+	 * @param research Research key
+	 */
 	public void compliteResearch(EntityPlayer player, String research)
 	{
 		try {
@@ -154,6 +177,11 @@ public class AdvThaumApi {
 		
 	}
 	
+	/**
+	 * Set vis in wand
+	 * @param wand to set
+	 * @param aspects to set
+	 */
 	public static void setVis(ItemStack wand, AspectList aspects)
 	{
 		Class wandclass = null;
@@ -185,6 +213,12 @@ public class AdvThaumApi {
 		}
 	}
 	
+	/**
+	 * Return amount of passed aspect in wand
+	 * @param wand
+	 * @param aspect
+	 * @return
+	 */
 	public static int getVis(ItemStack wand, Aspect aspect)
 	{
 		Class wandclass = null;
@@ -217,6 +251,14 @@ public class AdvThaumApi {
 		return 0;
 	}
 	
+	/**
+	 * Add vis in wand
+	 * @param wand to add
+	 * @param aspect to add
+	 * @param amount to add
+	 * @param insertit If false this only check can it insert
+	 * @return amount inserted
+	 */
 	public static int insertVis(ItemStack wand, Aspect aspect, int amount, boolean insertit)
 	{
 		Class wandclass = null;
@@ -286,6 +328,11 @@ public class AdvThaumApi {
 		}
 	}
 	
+	/**
+	 * Get max capcity of wand
+	 * @param wand to check
+	 * @return max amount
+	 */
 	public static int getMaxVis(ItemStack wand)
 	{
 		Class wandclass = null;
@@ -390,6 +437,17 @@ public class AdvThaumApi {
 		}
 	}
 
+	/**
+	 * Simulating axe of the stream effect
+	 * @param worldObj
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param bi
+	 * @param player
+	 * @param b
+	 * @param i
+	 */
 	public static void breakFurthestBlock(World worldObj, int x, int y, int z,
 			Block bi, EntityPlayer player, boolean b, int i) {
 		

@@ -1,16 +1,18 @@
 package com.gt22.elementalmagic.items;
 
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.wands.IWandRodOnUpdate;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.api.ThaumcraftApiHelper;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
 
 import com.gt22.elementalmagic.api.AdvThaumApi;
 import com.gt22.elementalmagic.core.ElementalMagic;
-import com.gt22.elementalmagic.wands.ElementalRodOnUpd;
+import com.gt22.elementalmagic.registry.WandAndCapsRegistry;
 
 public class ElementalRod extends Item {
 	public int capacity = 75;
@@ -19,6 +21,14 @@ public class ElementalRod extends Item {
 		setUnlocalizedName(unlocName);
 		setTextureName(ElementalMagic.modid + ":" + unlocName);
 		setCreativeTab(ElementalMagic.tab);
+	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World p_77659_2_,
+			EntityPlayer player)
+	{
+		System.out.println(ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), WandAndCapsRegistry.elementalRod.getResearch()));
+		return stack;
 	}
 	
 	@Override

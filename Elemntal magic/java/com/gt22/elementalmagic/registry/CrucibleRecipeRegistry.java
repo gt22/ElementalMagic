@@ -2,15 +2,13 @@ package com.gt22.elementalmagic.registry;
 
 import java.util.ArrayList;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
-
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.CrucibleRecipe;
+
+import com.gt22.elementalmagic.api.AdvThaumApi;
 
 public class CrucibleRecipeRegistry {
 

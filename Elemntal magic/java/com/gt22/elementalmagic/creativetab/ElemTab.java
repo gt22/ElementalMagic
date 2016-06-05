@@ -1,9 +1,9 @@
 package com.gt22.elementalmagic.creativetab;
 
-import com.gt22.elementalmagic.registry.ItemRegistry;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+
+import com.gt22.elementalmagic.registry.ItemRegistry;
 
 public class ElemTab extends CreativeTabs {
 
