@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.gui.container.AutoDecompTableContainer;
 import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
 
@@ -14,7 +14,7 @@ public class AutoDecompTableGUI extends GuiContainer
 {
   private TileAutoDecompTable te;
   private static AutoDecompTableContainer container;
-  public static final ResourceLocation texture = new ResourceLocation(ElementalMagic.modid, "textures/gui/AutoDecompTable.png");
+  public static final ResourceLocation texture = new ResourceLocation(Core.modid, "textures/gui/AutoDecompTable.png");
   public AutoDecompTableGUI(InventoryPlayer inventory, TileAutoDecompTable te)
   {
     super(container = new AutoDecompTableContainer(inventory, te));

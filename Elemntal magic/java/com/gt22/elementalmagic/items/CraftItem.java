@@ -9,21 +9,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.core.Core;
 
-public class CraftItem extends Item {
+public class CraftItem extends ItemBase {
 	
 	public IIcon[] icons;
-	public static String modid = ElementalMagic.modid;
+	public static String modid = Core.modid;
 	private String textureName;
 	private int maxmeta = 0;
 	ArrayList<String> names = new ArrayList();
 	public CraftItem()
 	{
-		super();
+		super("CraftItem", true);
 		this.setHasSubtypes(true);
-		this.setCreativeTab(ElementalMagic.tab);
-		setUnlocalizedName("CraftItem");
 	}
 	
 	public void addCraftItem(String unlocName)

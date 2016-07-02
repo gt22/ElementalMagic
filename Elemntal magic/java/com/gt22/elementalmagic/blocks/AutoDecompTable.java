@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.gui.GuiHandler;
 import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
 
@@ -17,8 +17,8 @@ public class AutoDecompTable extends BlockContainer
 	{
 		super(Material.wood);
 		setBlockName(unlocName);
-		setBlockTextureName(ElementalMagic.modid + ":" + unlocName);
-		setCreativeTab(ElementalMagic.tab);
+		setBlockTextureName(Core.modid + ":" + unlocName);
+		setCreativeTab(Core.tab);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class AutoDecompTable extends BlockContainer
 	{
 		if(!player.isSneaking())
 		{
-			player.openGui(ElementalMagic.instance, GuiHandler.AutoDecompTableID, world, x, y, z);
+			player.openGui(Core.instance, GuiHandler.AutoDecompTableID, world, x, y, z);
 			return true;
 		}
 		else

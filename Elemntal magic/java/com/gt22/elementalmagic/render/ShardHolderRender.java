@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.render.models.Shard;
 import com.gt22.elementalmagic.render.models.ShardHolder;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
@@ -66,7 +66,7 @@ public class ShardHolderRender extends TileEntitySpecialRenderer {
 		           }
 	           }
 		}
-		ResourceLocation textures = (new ResourceLocation(ElementalMagic.modid, texturename + ".png"));
+		ResourceLocation textures = (new ResourceLocation(Core.modid, texturename + ".png"));
 		Minecraft.getMinecraft().renderEngine.bindTexture(textures);
 		GL11.glPushMatrix();
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F); 
@@ -81,22 +81,22 @@ public class ShardHolderRender extends TileEntitySpecialRenderer {
            {
 	           case(0)://Air
 	           {
-	        	   texture = new ResourceLocation(ElementalMagic.modid, "models/AirShardModel.png");
+	        	   texture = new ResourceLocation(Core.modid, "models/AirShardModel.png");
 	        	   break;
 	           }
 	           case(1)://Fire
 	           {
-	        	   texture = new ResourceLocation(ElementalMagic.modid, "models/FireShardModel.png");
+	        	   texture = new ResourceLocation(Core.modid, "models/FireShardModel.png");
 	        	   break;
 	           }
 	           case(2)://Water
 	           {
-	        	   texture = new ResourceLocation(ElementalMagic.modid, "models/WaterShardModel.png");
+	        	   texture = new ResourceLocation(Core.modid, "models/WaterShardModel.png");
 	        	   break;
 	           }
 	           case(3)://Earth
 	           {
-	        	   texture = new ResourceLocation(ElementalMagic.modid, "models/EarthShardModel.png");
+	        	   texture = new ResourceLocation(Core.modid, "models/EarthShardModel.png");
 	        	   break;
 	           }
            }

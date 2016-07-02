@@ -3,20 +3,16 @@ package com.gt22.elementalmagic.items;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
 import com.gt22.elementalmagic.items.nbt.ItemNbt;
 
-public class BoundMatrix extends Item
+public class BoundMatrix extends ItemBase
 {
-	public BoundMatrix(String unlocName)
+	public BoundMatrix()
 	{
-		setCreativeTab(ElementalMagic.tab);
-		setUnlocalizedName(unlocName);
-		setTextureName(ElementalMagic.modid + ":" + unlocName);
+		super("BoundMatrix");
 		setMaxStackSize(1);
 	}
 	

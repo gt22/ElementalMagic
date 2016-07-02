@@ -8,7 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.core.Core;
+import com.gt22.elementalmagic.gui.GuiHandler;
 import com.gt22.elementalmagic.tiles.TileElementalizer;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
 
@@ -18,8 +19,8 @@ public class Elementalizer extends BlockContainer
 	public Elementalizer(String unlocName) {
 		super(Material.iron);
 		setBlockName(unlocName);
-		setBlockTextureName(ElementalMagic.modid + ":" + unlocName);
-		setCreativeTab(ElementalMagic.tab);
+		setBlockTextureName(Core.modid + ":" + unlocName);
+		setCreativeTab(Core.tab);
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class Elementalizer extends BlockContainer
 		return new TileElementalizer();
 	}
 	
-	public static TileShardHolder[] checkHolders(World world, int x, int y, int z)
+	public static TileShardHolder[] getHolders(World world, int x, int y, int z)
 	{
 		TileShardHolder[] holders = new TileShardHolder[4];
 		if(world.getTileEntity(x - 3, y, z) instanceof TileShardHolder)
@@ -63,6 +64,15 @@ public class Elementalizer extends BlockContainer
 				worldObj.spawnEntityInWorld(item);
 			}
 		}
+	}
+	
+	@Override
+	public boolean onBlockActivated(World world, int x,
+			int y, int z, EntityPlayer p,
+			int meta, float hitx, float hity,
+			float hitz) {
+		p.openGui(Core.instance, GuiHandler.ElementalizerID, world, x, y, z);
+		return true;
 	}
 
 }

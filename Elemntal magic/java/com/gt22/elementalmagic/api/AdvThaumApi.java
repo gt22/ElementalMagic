@@ -21,6 +21,8 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 public class AdvThaumApi {
 	
+	private static final String wandpath = "thaumcraft.common.items.wands.ItemWandCasting";
+	
 	/**
 	 * Return aspect list of primals with the given amount
 	 * @param amount
@@ -49,37 +51,20 @@ public class AdvThaumApi {
 	 */
 	public static AspectList reduceToPrimals(AspectList al, boolean merge)
 	  {
-	    AspectList out = new AspectList();
-	    for (Aspect aspect : al.getAspects()) {
-	      if (aspect != null) {
-	        if (aspect.isPrimal())
-	        {
-	          if (merge) {
-	            out.merge(aspect, al.getAmount(aspect));
-	          } else {
-	            out.add(aspect, al.getAmount(aspect));
-	          }
-	        }
-	        else
-	        {
-	          AspectList send = new AspectList();
-	          send.add(aspect.getComponents()[0], al.getAmount(aspect));
-	          send.add(aspect.getComponents()[1], al.getAmount(aspect));
-	          send = reduceToPrimals(send, merge);
-	          for (Aspect a : send.getAspects()) {
-	            if (merge) {
-	              out.merge(a, send.getAmount(a));
-	            } else {
-	              out.add(a, send.getAmount(a));
-	            }
-	          }
-	        }
-	      }
-	    }
-	    return out;
+		try
+		{
+			Class resman = Class.forName("thaumcraft.common.lib.research.ResearchManager");
+			Method reduce = resman.getMethod("reduceToPrimals", new Class[] {AspectList.class, boolean.class});
+			return (AspectList) reduce.invoke(resman.newInstance(), al, merge);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	   return null;
 	  }
 	
-	private static final String wandpath = "thaumcraft.common.items.wands.ItemWandCasting";
+	
 	
 	/**
 	 * Add an research points to player, also render visual effect (Aspect flying to thaumonomicon)

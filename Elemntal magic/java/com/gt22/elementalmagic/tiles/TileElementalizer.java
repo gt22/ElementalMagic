@@ -30,7 +30,7 @@ public class TileElementalizer extends TileEntity implements IInventory {
 		{
 			if(checktime == 0)
 			{
-				if(Elementalizer.checkHolders(worldObj, xCoord, yCoord, zCoord) == null)
+				if(Elementalizer.getHolders(worldObj, xCoord, yCoord, zCoord) == null)
 				{
 					for(int i = 0; i < getSizeInventory(); i++)
 					{
@@ -45,7 +45,7 @@ public class TileElementalizer extends TileEntity implements IInventory {
 					worldObj.removeTileEntity(xCoord, yCoord, zCoord);
 				}
 				checktime = 20;
-				shards = getShards();
+				shards = checkShards();
 			}
 			else
 			{
@@ -62,18 +62,6 @@ public class TileElementalizer extends TileEntity implements IInventory {
 		}
 	}
 	
-	public ElementalizerRecepie getRecepie(ItemStack input)
-	{
-		for(ElementalizerRecepie r : recepies)
-		{
-			if(r.input.getItem() == input.getItem() && r.input.getItemDamage() == input.getItemDamage())
-			{
-				return r;
-			}
-		}
-		return null;
-	}
-	
 	private int[] reqvis = new int[4];
 	private void processItem()
 	{
@@ -86,9 +74,9 @@ public class TileElementalizer extends TileEntity implements IInventory {
 				reqvis = null;
 				return;
 			}
-			if(getRecepie(input) != null)
+			if(ElementalizerApi.getRecepie(input) != null)
 			{
-				ElementalizerRecepie recepie = getRecepie(input);
+				ElementalizerRecepie recepie = ElementalizerApi.getRecepie(input);
 					
 					output = recepie.output;
 				if(reqvis == null)
@@ -101,7 +89,7 @@ public class TileElementalizer extends TileEntity implements IInventory {
 					Aspect.WATER,
 					Aspect.EARTH
 				};
-				TileShardHolder[] holders = Elementalizer.checkHolders(worldObj, xCoord, yCoord, zCoord);
+				TileShardHolder[] holders = Elementalizer.getHolders(worldObj, xCoord, yCoord, zCoord);
 				for(int i = 0; i < reqvis.length; i++)
 				{
 					if(shards && holders[i] != null)
@@ -144,9 +132,9 @@ public class TileElementalizer extends TileEntity implements IInventory {
 		}
 	}
 	
-	public boolean getShards()
+	public boolean checkShards()
 	{
-		TileShardHolder[] holders = Elementalizer.checkHolders(worldObj, xCoord, yCoord, zCoord);
+		TileShardHolder[] holders = Elementalizer.getHolders(worldObj, xCoord, yCoord, zCoord);
 		if(holders != null)
 		{
 			ItemStack[] shards = new ItemStack[4];
@@ -171,11 +159,35 @@ public class TileElementalizer extends TileEntity implements IInventory {
 		return false;
 	}
 	
+	public ItemStack[] getShards()
+	{
+		TileShardHolder[] holders = Elementalizer.getHolders(worldObj, xCoord, yCoord, zCoord);
+		if(holders != null)
+		{
+			ItemStack[] shards = new ItemStack[4];
+			shardcheck: for(int i = 0; i < 4; i++)
+			{
+				
+				ItemStack shard = holders[i].getStackInSlot(0);
+				for(ItemStack s : shards)
+				{
+					if(s != null && shard != null && s.getItemDamage() == shard.getItemDamage())
+					{
+						continue shardcheck;
+					}
+				}
+				shards[i] = shard;
+			}
+			return shards;
+		}
+		return null;
+	}
+	
+	
 	public TileElementalizer() {
 		inventory = new ItemStack[getSizeInventory()];
-		if(getRecepie(ItemApi.getItem("itemResource", 2)) == null) //If thaumium recepie not registered we need to register standar recepies
+		if(ElementalizerApi.getRecepie(ItemApi.getItem("itemResource", 2)) == null) //If thaumium recepie not registered we need to register standar recepies
 		{
-			System.out.println("registering");
 			registerStandartRecepies();
 		}
 	}
@@ -186,8 +198,7 @@ public class TileElementalizer extends TileEntity implements IInventory {
 		ElementalizerApi.addRecepie(new ElementalizerRecepie(ItemApi.getItem("itemShard", 0), new ItemStack(ItemRegistry.craftItem, 1, 2), 0, 10000, 10000, 10000));
 		ElementalizerApi.addRecepie(new ElementalizerRecepie(ItemApi.getItem("itemShard", 1), new ItemStack(ItemRegistry.craftItem, 1, 2), 10000, 0, 10000, 10000));
 		ElementalizerApi.addRecepie(new ElementalizerRecepie(ItemApi.getItem("itemShard", 2), new ItemStack(ItemRegistry.craftItem, 1, 2), 10000, 10000, 0, 10000));
-		ElementalizerApi.addRecepie(new ElementalizerRecepie(ItemApi.getItem("itemShard", 3), new ItemStack(ItemRegistry.craftItem, 1, 2), 10000, 10000, 10000, 0));
-		
+		ElementalizerApi.addRecepie(new ElementalizerRecepie(ItemApi.getItem("itemShard", 3), new ItemStack(ItemRegistry.craftItem, 1, 2), 10000, 10000, 10000, 0));	
 	}
 	
 	public ItemStack[] inventory;

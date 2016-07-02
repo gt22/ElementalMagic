@@ -1,7 +1,7 @@
 package com.gt22.elementalmagic.proxy;
 
 import com.gt22.elementalmagic.blocks.MetalBlock;
-import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.gui.GuiHandler;
 import com.gt22.elementalmagic.registry.ArcaneRecipeRegistry;
 import com.gt22.elementalmagic.registry.BlockRegistry;
@@ -30,7 +30,7 @@ public class CommonProxy {
 	public void init(FMLInitializationEvent e)
 	{
 		MetalBlock.registerMetalBlocksRecipes();
-		NetworkRegistry.INSTANCE.registerGuiHandler(ElementalMagic.instance, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(Core.instance, new GuiHandler());
 	}
 	
 	public void postInit(FMLPostInitializationEvent e)

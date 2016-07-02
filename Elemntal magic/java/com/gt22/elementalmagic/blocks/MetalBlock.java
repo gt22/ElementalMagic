@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,7 +18,7 @@ import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.wands.IWandable;
 
 import com.gt22.elementalmagic.api.AdvThaumApi;
-import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.registry.BlockRegistry;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -32,7 +33,7 @@ public class MetalBlock extends Block implements IWandable
 	public static ShapedRecipes[] recepies;
 	public MetalBlock() {
 		super(Material.iron);
-		setCreativeTab(ElementalMagic.tab);
+		setCreativeTab(Core.tab);
 	}
 
 	public static void registerMetalBlocksRecipes()
@@ -91,7 +92,7 @@ public class MetalBlock extends Block implements IWandable
 		icons = new IIcon[maxmeta];
 		for(int i = 0; i < maxmeta; i++)
 		{
-			icons[i] = reg.registerIcon(ElementalMagic.modid + ":" + names.get(i));
+			icons[i] = reg.registerIcon(Core.modid + ":" + names.get(i));
 		}
 	}
 	
@@ -114,7 +115,7 @@ public class MetalBlock extends Block implements IWandable
 	@Override
 	public int onWandRightClick(World world, ItemStack wandstack,
 			EntityPlayer player, int x, int y, int z, int side, int md) {
-		if(md == 0 && Elementalizer.checkHolders(world, x, y, z) != null && ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, AdvThaumApi.getElementas(50), false, false))
+		if(md == 0 && Elementalizer.getHolders(world, x, y, z) != null && ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, AdvThaumApi.getElementas(50), false, false))
 		{
 			ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, AdvThaumApi.getElementas(5000), true, false);
 			world.setBlock(x, y, z, BlockRegistry.elementalizer);

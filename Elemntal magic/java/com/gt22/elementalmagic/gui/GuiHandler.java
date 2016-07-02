@@ -4,10 +4,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 import com.gt22.elementalmagic.gui.container.AutoDecompTableContainer;
+import com.gt22.elementalmagic.gui.container.ElementalizerContainer;
 import com.gt22.elementalmagic.gui.container.HolderContainer;
 import com.gt22.elementalmagic.gui.gui.AutoDecompTableGUI;
+import com.gt22.elementalmagic.gui.gui.ElementalizerGui;
 import com.gt22.elementalmagic.gui.gui.HolderGUI;
 import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
+import com.gt22.elementalmagic.tiles.TileElementalizer;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -17,6 +20,7 @@ public class GuiHandler implements IGuiHandler
 
 	public static final int AutoDecompTableID = 0;
 	public static final int HolderID = 1;
+	public static final int ElementalizerID = 2;
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
@@ -29,6 +33,10 @@ public class GuiHandler implements IGuiHandler
 			case(HolderID):
 			{
 				return new HolderContainer(player.inventory, (TileShardHolder) world.getTileEntity(x, y, z));
+			}
+			case(ElementalizerID):
+			{
+				return new ElementalizerContainer(player.inventory, (TileElementalizer) world.getTileEntity(x, y, z));
 			}
 		}
 		return null;
@@ -46,6 +54,10 @@ public class GuiHandler implements IGuiHandler
 			case(HolderID):
 			{
 				return new HolderGUI(player.inventory, (TileShardHolder) world.getTileEntity(x, y, z));
+			}
+			case(ElementalizerID):
+			{
+				return new ElementalizerGui(player.inventory, (TileElementalizer) world.getTileEntity(x, y, z));
 			}
 		}
 		return null;

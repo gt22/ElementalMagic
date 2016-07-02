@@ -1,4 +1,4 @@
-package com.gt22.elementalmagic.items;
+package com.gt22.elementalmagic.items.tools;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.registry.Materials;
 
 public class ElemShovel extends ItemSpade {
@@ -22,8 +22,8 @@ public class ElemShovel extends ItemSpade {
 	public ElemShovel(String unlocName) {
 		super(Materials.toolMatElem);
 		setUnlocalizedName(unlocName);
-		setTextureName(ElementalMagic.modid + ":" + unlocName);
-		setCreativeTab(ElementalMagic.tab);
+		setTextureName(Core.modid + ":" + unlocName);
+		setCreativeTab(Core.tab);
 	}
 	
 

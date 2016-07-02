@@ -75,18 +75,13 @@ public class TileShardHolder extends TileEntity implements IInventory {
 	 }
 	
 
+
+
 	@Override
 	 public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	 {
 	     readFromNBT(pkt.func_148857_g());
 	 }
-	
-	 
-
-	@Override
-	public void updateEntity() {
-		
-	}
 	
 	@Override
 	public ItemStack getStackInSlotOnClosing(int index) {

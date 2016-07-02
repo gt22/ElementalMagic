@@ -6,16 +6,27 @@ import net.minecraft.item.ItemStack;
 
 public class ElementalizerApi
 {
+	
 	/**
-	 * Register recepie into elementalizer
-	 * @param recepie
+	 * WARNING recipies ignore stack NBT
+	 * Return recepie with given input
+	 * @param input
+	 * @return
 	 */
-	public static void addRecepie(ElementalizerRecepie recepie)
+	public static ElementalizerRecepie getRecepie(ItemStack input)
 	{
-		TileElementalizer.recepies.add(recepie);
+		for(ElementalizerRecepie r : TileElementalizer.recepies)
+		{
+			if(r.input.getItem() == input.getItem() && r.input.getItemDamage() == input.getItemDamage())
+			{
+				return r;
+			}
+		}
+		return null;
 	}
 	
 	/**
+	 * WARNING recipies ignore stack NBT
 	 * Creating elementalizer recepie and adding it
 	 * @param intput
 	 * @param output
@@ -30,5 +41,15 @@ public class ElementalizerApi
 		ElementalizerRecepie recepie = new ElementalizerRecepie(intput, output, aer, ignis, aqua, terra);
 		addRecepie(recepie);
 		return recepie;
+	}
+	
+	/**
+	 * WARNING recipies ignore stack NBT
+	 * Register recepie into elementalizer
+	 * @param recepie
+	 */
+	public static void addRecepie(ElementalizerRecepie recepie)
+	{
+		TileElementalizer.recepies.add(recepie);
 	}
 }

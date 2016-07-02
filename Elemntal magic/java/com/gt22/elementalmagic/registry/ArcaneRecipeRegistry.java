@@ -17,7 +17,7 @@ public class ArcaneRecipeRegistry {
 	public static ShapedArcaneRecipe boundMatrix;
 	public static ShapedArcaneRecipe primalCharm;
 	public static ShapedArcaneRecipe salisMundis;
-	public static ShapedArcaneRecipe[] altrsrh = new ShapedArcaneRecipe[2];
+	public static ShapedArcaneRecipe[] altrsrd = new ShapedArcaneRecipe[2];
 	public static void init(){
 		windFoci = ThaumcraftApi.addArcaneCraftingRecipe(
 		"windfocus",
@@ -150,16 +150,16 @@ public class ArcaneRecipeRegistry {
 		
 		primalCharm = ThaumcraftApi.addArcaneCraftingRecipe("altrsrd", ItemApi.getItem("itemResource", 15), AdvThaumApi.getPrimals(30),
 		" o ",
-		"geg",
+		"lel",
 		" n ",
 		'o', ItemApi.getItem("itemShard", 4),
-		'g', new ItemStack(ItemRegistry.craftItem, 1, 1),
+		'l', new ItemStack(ItemRegistry.craftItem, 1, 1),
 		'e', new ItemStack(ItemRegistry.craftItem, 1, 2),
 		'n', ItemApi.getItem("itemShard", 5));
 		
-		salisMundis = ThaumcraftApi.addArcaneCraftingRecipe("altrsrd", ItemApi.getItem("itemResource", 14), AdvThaumApi.getPrimals(50), "e", 'e', new ItemStack(ItemRegistry.craftItem, 1, 2));
-		altrsrh[0] = primalCharm;
-		altrsrh[1] = salisMundis;
+		salisMundis = ThaumcraftApi.addArcaneCraftingRecipe("altrsrd", ItemApi.getItem("itemResource", 14), AdvThaumApi.getPrimals(70), "e", 'e', new ItemStack(ItemRegistry.craftItem, 1, 2));
+		altrsrd[0] = primalCharm;
+		altrsrd[1] = salisMundis;
 		}
 	
 

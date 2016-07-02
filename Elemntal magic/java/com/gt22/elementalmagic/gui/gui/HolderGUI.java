@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.gt22.elementalmagic.core.ElementalMagic;
+import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.gui.container.HolderContainer;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
 
@@ -14,7 +14,7 @@ public class HolderGUI extends GuiContainer
 {
   private TileShardHolder te;
   private static HolderContainer container;
-  public static final ResourceLocation texture = new ResourceLocation(ElementalMagic.modid, "textures/gui/HolderGUI.png");
+  public static final ResourceLocation texture = new ResourceLocation(Core.modid, "textures/gui/HolderGUI.png");
   public HolderGUI(InventoryPlayer inventory, TileShardHolder te)
   {
     super(container = new HolderContainer(inventory, te));
