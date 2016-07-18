@@ -20,7 +20,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(version = Core.version, modid = Core.modid, name = Core.name, dependencies = "required-after:gt22core")
+@Mod(version = Core.version, modid = Core.modid, name = Core.name, dependencies = "required-after:gt22core; required-after:Thaumcraft")
 public class Core implements IMod {
 	public static final String name = "Elemental magic";
 	public static final String modid = "elemmagic";
