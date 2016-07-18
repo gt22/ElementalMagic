@@ -31,14 +31,14 @@ public class Elementalizer extends BlockContainer
 	public static TileShardHolder[] getHolders(World world, int x, int y, int z)
 	{
 		TileShardHolder[] holders = new TileShardHolder[4];
-		if(world.getTileEntity(x - 3, y, z) instanceof TileShardHolder)
-			holders[0] = (TileShardHolder) world.getTileEntity(x - 3, y, z);
-		if(world.getTileEntity(x + 3, y, z) instanceof TileShardHolder)	
-			holders[1] = (TileShardHolder) world.getTileEntity(x + 3, y, z);
-		if(world.getTileEntity(x, y, z - 3) instanceof TileShardHolder)	
-			holders[2] = (TileShardHolder) world.getTileEntity(x, y, z - 3);
-		if(world.getTileEntity(x, y, z + 3) instanceof TileShardHolder)
-			holders[3] = (TileShardHolder) world.getTileEntity(x, y, z + 3);
+		if(world.getTileEntity(x - 1, y, z) instanceof TileShardHolder)
+			holders[0] = (TileShardHolder) world.getTileEntity(x - 1, y, z);
+		if(world.getTileEntity(x + 1, y, z) instanceof TileShardHolder)	
+			holders[1] = (TileShardHolder) world.getTileEntity(x + 1, y, z);
+		if(world.getTileEntity(x, y, z - 1) instanceof TileShardHolder)	
+			holders[2] = (TileShardHolder) world.getTileEntity(x, y, z - 1);
+		if(world.getTileEntity(x, y, z + 1) instanceof TileShardHolder)
+			holders[3] = (TileShardHolder) world.getTileEntity(x, y, z + 1);
 		for(int i  = 0; i < holders.length; i++)
 		{
 			if(holders == null || !(holders[i] instanceof TileShardHolder))

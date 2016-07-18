@@ -5,19 +5,20 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
-import thaumcraft.api.wands.ItemFocusBasic;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
 import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.upgrades.Upgrades;
+import com.gt22.gt22core.integration.thaumcraft.api.AdvThaumApi;
+import com.gt22.gt22core.integration.thaumcraft.item.FocusBase;
 
 public class CurrentFocus extends FocusBase {
 	public CurrentFocus() {
-		super("CurrentFocus");
+		super("CurrentFocus", Core.instance);
 	}
 
 	@Override
@@ -104,7 +105,8 @@ public class CurrentFocus extends FocusBase {
 			{
 				if(!world.isRemote && ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, getVisCostNoFrugal(focus), false, false))
 				{
-					if(place(i, y, j, world, wandstack, focus, player) && !drawed)
+					
+					if(place(i, y, j, world, wandstack, focus, player, ForgeDirection.getOrientation(mobj.sideHit)) && !drawed)
 					{
 						ThaumcraftApiHelper.consumeVisFromWand(wandstack, player, getVisCostNoFrugal(focus), true, false);
 						drawed = true;
@@ -115,7 +117,7 @@ public class CurrentFocus extends FocusBase {
 		return wandstack;
 	}
 	
-	public boolean place(int i, int y, int j, World world, ItemStack wandstack, ItemStack focus, EntityPlayer player)
+	public boolean place(int i, int y, int j, World world, ItemStack wandstack, ItemStack focus, EntityPlayer player, ForgeDirection dir)
 	{
 		if(world.getBlock(i, y, j).isReplaceable(world, i, y, j))
 		{
@@ -131,16 +133,16 @@ public class CurrentFocus extends FocusBase {
 			}
 			
 		}
-		else if(world.getBlock(i, y + 1, j).isReplaceable(world, i, y + 1, j))
+		else if(world.getBlock(i + dir.offsetX, y + dir.offsetY, j + dir.offsetZ).isReplaceable(world, i + dir.offsetX, y + dir.offsetY, j + dir.offsetZ))
 		{
 			if(isUpgradedWith(focus, Upgrades.lava))
 			{
-				world.setBlock(i, y + 1, j, Blocks.lava);
+				world.setBlock(i + dir.offsetX, y + dir.offsetY, j + dir.offsetZ, Blocks.lava);
 				return true;
 			}
 			else
 			{
-				world.setBlock(i, y + 1, j, Blocks.water);
+				world.setBlock(i + dir.offsetX, y + dir.offsetY, j + dir.offsetZ, Blocks.water);
 				return true;
 			}
 		}

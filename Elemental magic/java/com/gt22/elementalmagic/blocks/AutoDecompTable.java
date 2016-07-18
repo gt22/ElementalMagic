@@ -2,9 +2,12 @@ package com.gt22.elementalmagic.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.gui.GuiHandler;
@@ -13,6 +16,7 @@ import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
 public class AutoDecompTable extends BlockContainer
 {
 
+	private static IIcon[] icons = new IIcon[2];
 	public AutoDecompTable(String unlocName)
 	{
 		super(Material.wood);
@@ -27,6 +31,19 @@ public class AutoDecompTable extends BlockContainer
 		return new TileAutoDecompTable();
 	}
 
+	@Override
+	public void registerBlockIcons(IIconRegister reg)
+	{
+		icons[0] = reg.registerIcon(Core.modid + ":AutoDecomTableSide");
+		icons[1] = reg.registerIcon(Core.modid + ":AutoDecomTableTop");
+	}
+	
+	@Override
+	public IIcon getIcon(int side, int meta)
+	{
+		ForgeDirection dir = ForgeDirection.getOrientation(side);
+		return dir == ForgeDirection.DOWN || dir == ForgeDirection.UP ? icons[1] : icons[0];
+	}
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)

@@ -1,22 +1,19 @@
 package com.gt22.elementalmagic.gui.container;
 
-import thaumcraft.api.ItemApi;
-
-import com.gt22.elementalmagic.tiles.TileElementalizer;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import com.gt22.elementalmagic.tiles.TileElementalizer;
+import com.gt22.gt22core.baseclasses.container.ContainerWithPlayerInv;
+
 public class ElementalizerContainer extends ContainerWithPlayerInv {
 
 	TileElementalizer te;
 	public ElementalizerContainer(IInventory playerInv, TileElementalizer te) {
-		super(playerInv);
+		super(playerInv, new Slot[] {new Slot(te, 0, 80, 12), new Slot(te, 1, 80, 56)});
 		this.te = te;
-		addSlotToContainer(new Slot(te, 0, 80, 12));
-		addSlotToContainer(new Slot(te, 1, 80, 56));
 	}
 
 	@Override

@@ -1,13 +1,12 @@
 package com.gt22.elementalmagic.registry;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
-
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.InfusionRecipe;
+
+import com.gt22.gt22core.integration.thaumcraft.api.AdvThaumApi;
 
 public class InfusionRecipeRegistry {
 	public static InfusionRecipe elementalWand;

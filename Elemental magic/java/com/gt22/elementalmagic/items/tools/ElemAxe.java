@@ -6,9 +6,9 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
 import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.registry.Materials;
+import com.gt22.gt22core.integration.thaumcraft.api.AdvThaumApi;
 
 public class ElemAxe extends ItemAxe {
 

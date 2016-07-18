@@ -1,8 +1,8 @@
 package com.gt22.elementalmagic.api;
 
-import com.gt22.elementalmagic.tiles.TileElementalizer;
-
 import net.minecraft.item.ItemStack;
+
+import com.gt22.elementalmagic.tiles.TileElementalizer;
 
 public class ElementalizerApi
 {

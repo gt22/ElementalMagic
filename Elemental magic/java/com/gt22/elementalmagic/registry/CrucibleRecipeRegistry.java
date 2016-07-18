@@ -8,7 +8,7 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.crafting.CrucibleRecipe;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
+import com.gt22.gt22core.integration.thaumcraft.api.AdvThaumApi;
 
 public class CrucibleRecipeRegistry {
 

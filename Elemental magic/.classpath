@@ -6,5 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/thaumcraft"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/baubles"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Gt22Core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

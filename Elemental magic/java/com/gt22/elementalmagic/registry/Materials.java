@@ -1,7 +1,6 @@
 package com.gt22.elementalmagic.registry;
 
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class Materials {

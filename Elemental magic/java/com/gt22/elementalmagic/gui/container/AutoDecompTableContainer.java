@@ -5,17 +5,18 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import com.gt22.elementalmagic.gui.slot.SlotBoundMatrix;
 import com.gt22.elementalmagic.registry.ItemRegistry;
 import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
+import com.gt22.gt22core.baseclasses.container.ContainerWithPlayerInv;
 
 public class AutoDecompTableContainer extends ContainerWithPlayerInv {
 	
 	 private TileAutoDecompTable te;
 	 
 	    public AutoDecompTableContainer(IInventory playerInv, TileAutoDecompTable te) {
-	        super(playerInv);
+	        super(playerInv, new Slot[] {new Slot(te, 0, 63, 15), new SlotBoundMatrix(te, 1, 64, 48)});
 	    	this.te = te;
-	        this.addSlotToContainer(new Slot(te, 0, 63, 15));
 	    }
 	    
 

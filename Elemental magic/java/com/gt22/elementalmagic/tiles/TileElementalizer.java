@@ -1,27 +1,23 @@
 package com.gt22.elementalmagic.tiles;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
 import com.gt22.elementalmagic.api.ElementalizerApi;
 import com.gt22.elementalmagic.api.ElementalizerRecepie;
 import com.gt22.elementalmagic.blocks.Elementalizer;
 import com.gt22.elementalmagic.registry.BlockRegistry;
 import com.gt22.elementalmagic.registry.ItemRegistry;
+import com.gt22.gt22core.baseclasses.tileEntity.TileWithInventory;
+import com.gt22.gt22core.integration.thaumcraft.api.AdvThaumApi;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -51,7 +47,7 @@ public class TileElementalizer extends TileWithInventory {
 							worldObj.spawnEntityInWorld(item);
 						}
 					}
-					worldObj.setBlock(xCoord, yCoord, zCoord, BlockRegistry.metalBlocks);
+					worldObj.setBlock(xCoord, yCoord, zCoord, BlockRegistry.elementalizerBase);
 					worldObj.removeTileEntity(xCoord, yCoord, zCoord);
 				}
 				checktime = 20;

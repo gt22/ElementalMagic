@@ -1,13 +1,15 @@
 package com.gt22.elementalmagic.core;
 
-import org.apache.logging.log4j.Logger;
-
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 
+import org.apache.logging.log4j.Logger;
+
 import com.gt22.elementalmagic.command.ElemComands;
-import com.gt22.elementalmagic.config.CfgValues;
-import com.gt22.elementalmagic.creativetab.ElemTab;
 import com.gt22.elementalmagic.proxy.CommonProxy;
+import com.gt22.elementalmagic.registry.ItemRegistry;
+import com.gt22.gt22core.interfaces.IMod;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -18,8 +20,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(version = Core.version, modid = Core.modid, name = Core.name, dependencies = "required-after:Thaumcraft")
-public class Core {
+@Mod(version = Core.version, modid = Core.modid, name = Core.name, dependencies = "required-after:gt22core")
+public class Core implements IMod {
 	public static final String name = "Elemental magic";
 	public static final String modid = "elemmagic";
 	public static final int globalversion = 0;
@@ -27,26 +29,38 @@ public class Core {
 	public static final int gameversion = 1710;
 	public static final int bugfixversion = 0;
 	public static final String version = globalversion + "." + minorversion + "." + gameversion + "." + bugfixversion;
-	private static final String clientproxy = "com.gt22.elementalmagic.proxy.ClientProxy";
-	private static final String serverproxy = "com.gt22.elementalmagic.proxy.ServerProxy";
+	private static final String proxypath = "com.gt22.elementalmagic.proxy";
 	
-	public static ElemTab tab = new ElemTab("ElementalMagic");
-	public static Configuration cfg;
-	public static Logger log;
+	public static CreativeTabs tab = new CreativeTabs("ElementalMagic")
+	{		
+		@Override
+		public Item getTabIconItem()
+		{
+			return ItemRegistry.windFocus;
+		}
+	};
+	
+	@Override
+	public CreativeTabs[] getCreativeTabs()
+	{
+		return new CreativeTabs[] {tab};
+	}
+	
+	@Override
+	public String getModid()
+	{
+		return modid;
+	}
+	
 	@Instance(modid)
 	public static Core instance = new Core();
 	
-	@SidedProxy(clientSide = clientproxy, serverSide= serverproxy)
+	@SidedProxy(clientSide = proxypath + ".ClientProxy", serverSide= proxypath + ".ServerProxy")
 	public static CommonProxy proxy;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e)
 	{
-		log = e.getModLog();
-		cfg = new Configuration(e.getSuggestedConfigurationFile());
-		cfg.load();
-		CfgValues.init(cfg);
-		cfg.save();
 		proxy.preInit(e);
 	}
 	@EventHandler
@@ -61,8 +75,8 @@ public class Core {
 	}
 	
 	@EventHandler
-	public void serverLoad(FMLServerStartingEvent event)
+	public void serverLoad(FMLServerStartingEvent e)
 	{
-		event.registerServerCommand(new ElemComands());
+		e.registerServerCommand(new ElemComands());
 	}
 }

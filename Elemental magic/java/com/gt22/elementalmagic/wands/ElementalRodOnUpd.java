@@ -6,7 +6,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.IWandRodOnUpdate;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
+import com.gt22.gt22core.integration.thaumcraft.api.AdvThaumApi;
 
 public class ElementalRodOnUpd implements IWandRodOnUpdate {
 

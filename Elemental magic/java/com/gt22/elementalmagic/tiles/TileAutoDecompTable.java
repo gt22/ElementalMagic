@@ -1,20 +1,18 @@
 package com.gt22.elementalmagic.tiles;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
 import com.gt22.elementalmagic.config.CfgValues;
 import com.gt22.elementalmagic.registry.ItemRegistry;
+import com.gt22.gt22core.baseclasses.tileEntity.TileWithInventory;
+import com.gt22.gt22core.integration.thaumcraft.api.AdvThaumApi;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -47,7 +45,7 @@ public class TileAutoDecompTable extends TileWithInventory {
 	    {
 	      return false;
 	    }
-	    AspectList al = new AspectList(inventory[0]);
+	    AspectList al = new AspectList(getStackInSlot(0));
 	    if ((al == null) || (al.size() == 0))
 	    {
 	      return false;

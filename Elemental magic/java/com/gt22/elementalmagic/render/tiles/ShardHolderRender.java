@@ -13,17 +13,17 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.gt22.elementalmagic.core.Core;
-import com.gt22.elementalmagic.render.models.Shard;
-import com.gt22.elementalmagic.render.models.ShardHolder;
+import com.gt22.elementalmagic.render.models.ShardHolderModel;
+import com.gt22.elementalmagic.render.models.ShardModel;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
 
 public class ShardHolderRender extends TileEntitySpecialRenderer {
 
-	private ShardHolder model;
-	private Shard shard;
+	private ShardHolderModel model;
+	private ShardModel shard;
 	public ShardHolderRender() {
-		model = new ShardHolder();
-		shard = new Shard();
+		model = new ShardHolderModel();
+		shard = new ShardModel();
 	}
 	
 	private void adjustRotatePivotViaMeta(World world, int x, int y, int z) 

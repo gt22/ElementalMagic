@@ -1,9 +1,9 @@
 package com.gt22.elementalmagic.gui.slot;
 
-import thaumcraft.api.ItemApi;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import thaumcraft.api.ItemApi;
 
 public class ShardSlot extends Slot
 {

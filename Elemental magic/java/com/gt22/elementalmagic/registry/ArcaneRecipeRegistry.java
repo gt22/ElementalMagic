@@ -9,18 +9,23 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
+import com.gt22.gt22core.integration.thaumcraft.api.AdvThaumApi;
 
-public class ArcaneRecipeRegistry {
-	public static ShapedArcaneRecipe windFoci, emberFoci, currentFoci, natureFoci, inertFoci, elemCap, elemPcik, elemSword, elemAxe, elemShovel, elemHoe;
-	public static ShapedArcaneRecipe[] tools;
+public class ArcaneRecipeRegistry
+{
+	public static ShapedArcaneRecipe windFoci, emberFoci, currentFoci,
+			natureFoci, inertFoci, elemCap, elemPcik, elemSword, elemAxe,
+			elemShovel, elemHoe, aerCharm, aquaCharm, terraCharm, ignisCharm, neutralCharm;
 	public static ShapedArcaneRecipe boundMatrix;
 	public static ShapedArcaneRecipe primalCharm;
 	public static ShapedArcaneRecipe salisMundis;
-	public static ShapedArcaneRecipe[] altrsrd = new ShapedArcaneRecipe[2];
-	public static void init(){
-		windFoci = ThaumcraftApi.addArcaneCraftingRecipe(
-		"windfocus",
+
+	/**
+	 * @formatter:off
+	 */
+	public static void init()
+	{
+		windFoci = ThaumcraftApi.addArcaneCraftingRecipe("windfocus",
 		new ItemStack(ItemRegistry.windFocus, 1, 0),
 		new AspectList().add(Aspect.AIR, 30),
 		"zxz",
@@ -29,28 +34,25 @@ public class ArcaneRecipeRegistry {
 		'z', ItemApi.getItem("itemShard", 0),
 		'x', Items.sugar,
 		'c', new ItemStack(ItemRegistry.craftItem, 1, 0));
-		emberFoci = ThaumcraftApi.addArcaneCraftingRecipe(
-		"emberfocus",
+		emberFoci = ThaumcraftApi.addArcaneCraftingRecipe("emberfocus",
 		new ItemStack(ItemRegistry.emberFocus, 1, 0),
-		new AspectList().add(Aspect.FIRE, 30),
-		"zxz",
-		"xcx",
-		"zxz",
-		'z', ItemApi.getItem("itemShard", 1),
-		'x', Items.coal,
+		new AspectList().add(Aspect.FIRE, 30), 
+		"zxz", 
+		"xcx", 
+		"zxz", 
+		'z', ItemApi.getItem("itemShard", 1), 
+		'x', Items.coal, 
 		'c', new ItemStack(ItemRegistry.craftItem, 1, 0));
-		currentFoci = ThaumcraftApi.addArcaneCraftingRecipe(
-		"currentfocus",
+		currentFoci = ThaumcraftApi.addArcaneCraftingRecipe("currentfocus",
 		new ItemStack(ItemRegistry.currentFocus, 1, 0),
 		new AspectList().add(Aspect.WATER, 30),
-		"zxz",
-		"xcx",
-		"zxz",
+		"zxz", 
+		"xcx", 
+		"zxz", 
 		'z', ItemApi.getItem("itemShard", 2),
 		'x', new ItemStack(Items.potionitem, 0, 0),
 		'c', new ItemStack(ItemRegistry.craftItem, 1, 0));
-		natureFoci = ThaumcraftApi.addArcaneCraftingRecipe(
-		"naturefocus",
+		natureFoci = ThaumcraftApi.addArcaneCraftingRecipe("naturefocus",
 		new ItemStack(ItemRegistry.natureFocus, 1, 0),
 		new AspectList().add(Aspect.EARTH, 30),
 		"zxz",
@@ -59,19 +61,16 @@ public class ArcaneRecipeRegistry {
 		'z', ItemApi.getItem("itemShard", 3),
 		'x', Items.wheat_seeds,
 		'c', new ItemStack(ItemRegistry.craftItem, 1, 0));
-		inertFoci = ThaumcraftApi.addArcaneCraftingRecipe(
-		"elemfocies",
+		inertFoci = ThaumcraftApi.addArcaneCraftingRecipe("elemfocies",
 		new ItemStack(ItemRegistry.craftItem, 1, 0),
-		new AspectList().add(Aspect.FIRE, 10).add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10),
+		AdvThaumApi.getElementas(10),
 		"zxz",
 		"xcx",
 		"zxz",
 		'z', Blocks.glass,
 		'x', Items.quartz,
 		'c', Items.diamond);
-		
-		elemCap = ThaumcraftApi.addArcaneCraftingRecipe(
-		"CAP_ELEMCAP",
+		elemCap = ThaumcraftApi.addArcaneCraftingRecipe("CAP_ELEMCAP",
 		new ItemStack(ItemRegistry.elemCap),
 		AdvThaumApi.getElementas(25),
 		"z1z",
@@ -83,59 +82,50 @@ public class ArcaneRecipeRegistry {
 		'3', ItemApi.getItem("itemShard", 3),
 		'4', ItemApi.getItem("itemShard", 1),
 		'c', ItemApi.getItem("itemWandCap", 1));
-		
 		elemPcik = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
 		new ItemStack(ItemRegistry.elemPick),
-		new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
-			"zzz",
-			" x ",
-			" x ",
-			'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
-			'x', new ItemStack(Items.stick));
+		AdvThaumApi.getElementas(10),
+		"zzz",
+		" x ",
+		" x ", 
+		'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
+		'x', new ItemStack(Items.stick));
 		elemAxe = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
-				new ItemStack(ItemRegistry.elemAxe),
-				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
-				true,
-				"zz ",
-				"zx ",
-				" x ",
-				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
-				'x', new ItemStack(Items.stick));
+		new ItemStack(ItemRegistry.elemAxe),
+		AdvThaumApi.getElementas(10),
+		true,
+		"zz ",
+		"zx ",
+		" x ",
+		'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
+		'x', new ItemStack(Items.stick));
 		elemHoe = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
-				new ItemStack(ItemRegistry.elemHoe),
-				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
-				true,
-				"zz ",
-				" x ",
-				" x ",
-				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
-				'x', new ItemStack(Items.stick));
+		new ItemStack(ItemRegistry.elemHoe),
+		AdvThaumApi.getElementas(10),
+		true,
+		"zz ",
+		" x ",
+		" x ",
+		'z', new ItemStack(ItemRegistry.craftItem, 1, 1), 
+		'x', new ItemStack(Items.stick));
 		elemSword = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
-				new ItemStack(ItemRegistry.elemSword),
-				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
-				" z ",
-				" z ",
-				" x ",
-				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
-				'x', new ItemStack(Items.stick));
+		new ItemStack(ItemRegistry.elemSword),
+		AdvThaumApi.getElementas(10),
+		" z ",
+		" z ", 
+		" x ", 
+		'z', new ItemStack(ItemRegistry.craftItem, 1, 1), 
+		'x', new ItemStack(Items.stick));
 		elemShovel = ThaumcraftApi.addArcaneCraftingRecipe("elemingot",
-				new ItemStack(ItemRegistry.elemShovel),
-				new AspectList().add(Aspect.AIR, 10).add(Aspect.WATER, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10),
-				true,
-				" z ",
-				" x ",
-				" x ",
-				'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
-				'x', new ItemStack(Items.stick));
-		tools = new ShapedArcaneRecipe[5];
-		tools[0] = elemPcik;
-		tools[1] = elemAxe;
-		tools[2] = elemShovel;
-		tools[3] = elemSword;
-		tools[4] = elemHoe;
-		
-		boundMatrix = ThaumcraftApi.addArcaneCraftingRecipe(
-		"autodecomp",
+		new ItemStack(ItemRegistry.elemShovel), 
+		AdvThaumApi.getElementas(10),
+		true,
+		" z ",
+		" x ",
+		" x ",
+		'z', new ItemStack(ItemRegistry.craftItem, 1, 1),
+		'x', new ItemStack(Items.stick));
+		boundMatrix = ThaumcraftApi.addArcaneCraftingRecipe("autodecomp",
 		new ItemStack(ItemRegistry.boundMatrix),
 		AdvThaumApi.getElementas(35),
 		"#$#",
@@ -147,8 +137,9 @@ public class ArcaneRecipeRegistry {
 		'^', new ItemStack(Items.emerald),
 		'&', ItemApi.getItem("itemResource", 10),
 		'*', new ItemStack(ItemRegistry.craftItem, 1, 1));
-		
-		primalCharm = ThaumcraftApi.addArcaneCraftingRecipe("altrsrd", ItemApi.getItem("itemResource", 15), AdvThaumApi.getPrimals(30),
+		primalCharm = ThaumcraftApi.addArcaneCraftingRecipe("altrsrd",
+		ItemApi.getItem("itemResource", 15),
+		AdvThaumApi.getPrimals(30),
 		" o ",
 		"lel",
 		" n ",
@@ -156,11 +147,53 @@ public class ArcaneRecipeRegistry {
 		'l', new ItemStack(ItemRegistry.craftItem, 1, 1),
 		'e', new ItemStack(ItemRegistry.craftItem, 1, 2),
 		'n', ItemApi.getItem("itemShard", 5));
-		
-		salisMundis = ThaumcraftApi.addArcaneCraftingRecipe("altrsrd", ItemApi.getItem("itemResource", 14), AdvThaumApi.getPrimals(70), "e", 'e', new ItemStack(ItemRegistry.craftItem, 1, 2));
-		altrsrd[0] = primalCharm;
-		altrsrd[1] = salisMundis;
-		}
-	
-
+		salisMundis = ThaumcraftApi.addArcaneCraftingRecipe("altrsrd",
+		ItemApi.getItem("itemResource", 14),
+		AdvThaumApi.getPrimals(70),
+		"e",
+		'e', new ItemStack(ItemRegistry.craftItem, 1, 2));
+		aerCharm = ThaumcraftApi.addArcaneCraftingRecipe("elementalCharms", new ItemStack(ItemRegistry.elemCharms, 1, 0),
+		AdvThaumApi.getElementas(40).add(Aspect.AIR, 20),
+		" sa",
+		"s s",
+		"fs ",
+		'a', ItemApi.getItem("itemBaubleBlanks", 0),
+		's', new ItemStack(Items.string),
+		'f', new ItemStack(ItemRegistry.windFocus));
+		aquaCharm = ThaumcraftApi.addArcaneCraftingRecipe("elementalCharms", new ItemStack(ItemRegistry.elemCharms, 1, 1),
+		AdvThaumApi.getElementas(40).add(Aspect.WATER, 20),
+		" sa",
+		"s s",
+		"fs ",
+		'a', ItemApi.getItem("itemBaubleBlanks", 0),
+		's', new ItemStack(Items.string),
+		'f', new ItemStack(ItemRegistry.currentFocus));
+		terraCharm = ThaumcraftApi.addArcaneCraftingRecipe("elementalCharms", new ItemStack(ItemRegistry.elemCharms, 1, 2),
+		AdvThaumApi.getElementas(40).add(Aspect.EARTH, 20),
+		" sa",
+		"s s",
+		"fs ",
+		'a', ItemApi.getItem("itemBaubleBlanks", 0),
+		's', new ItemStack(Items.string),
+		'f', new ItemStack(ItemRegistry.natureFocus));
+		ignisCharm = ThaumcraftApi.addArcaneCraftingRecipe("elementalCharms", new ItemStack(ItemRegistry.elemCharms, 1, 3),
+		AdvThaumApi.getElementas(40).add(Aspect.FIRE, 20),
+		" sa",
+		"s s",
+		"fs ",
+		'a', ItemApi.getItem("itemBaubleBlanks", 0),
+		's', new ItemStack(Items.string),
+		'f', new ItemStack(ItemRegistry.emberFocus));
+		neutralCharm = ThaumcraftApi.addArcaneCraftingRecipe("elementalCharms", new ItemStack(ItemRegistry.elemCharms, 1, 4),
+		AdvThaumApi.getElementas(40),
+		" sa",
+		"s s",
+		"fs ",
+		'a', ItemApi.getItem("itemBaubleBlanks", 0),
+		's', new ItemStack(Items.string),
+		'f', new ItemStack(ItemRegistry.craftItem, 1, 0));
+	}
+	/**
+	 * @formatter:on
+	 */
 }

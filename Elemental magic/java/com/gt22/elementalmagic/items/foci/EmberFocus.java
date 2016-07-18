@@ -12,14 +12,14 @@ import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
-import thaumcraft.api.wands.ItemFocusBasic;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
 import com.gt22.elementalmagic.core.Core;
+import com.gt22.gt22core.integration.thaumcraft.api.AdvThaumApi;
+import com.gt22.gt22core.integration.thaumcraft.item.FocusBase;
 
 public class EmberFocus extends FocusBase {
 	public EmberFocus() {
-		super("EmberFocus");
+		super("EmberFocus", Core.instance);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class EmberFocus extends FocusBase {
 	@Override
 	public AspectList getVisCostNoFrugal(ItemStack focusstack) {
 		AspectList ret = new AspectList();
-		ret.add(Aspect.FIRE, 500 + getUpgradeLevel(focusstack, FocusUpgradeType.potency) * 1000 + getUpgradeLevel(focusstack, FocusUpgradeType.potency) * 500);
+		ret.add(Aspect.FIRE, 2000 + getUpgradeLevel(focusstack, FocusUpgradeType.potency) * 500 + getUpgradeLevel(focusstack, FocusUpgradeType.enlarge) * 250);
 		return ret;
 	}
 

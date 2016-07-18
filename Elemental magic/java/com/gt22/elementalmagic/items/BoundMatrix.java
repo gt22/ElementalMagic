@@ -6,13 +6,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.gt22.elementalmagic.items.nbt.ItemNbt;
+import com.gt22.elementalmagic.core.Core;
+import com.gt22.gt22core.baseclasses.item.ItemBase;
+import com.gt22.gt22core.utils.ItemNbt;
 
 public class BoundMatrix extends ItemBase
 {
 	public BoundMatrix()
 	{
-		super("BoundMatrix");
+		super("BoundMatrix", Core.instance);
 		setMaxStackSize(1);
 	}
 	

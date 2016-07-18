@@ -13,11 +13,11 @@ import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
-import thaumcraft.api.wands.ItemFocusBasic;
 
-import com.gt22.elementalmagic.api.AdvThaumApi;
 import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.upgrades.Upgrades;
+import com.gt22.gt22core.integration.thaumcraft.api.AdvThaumApi;
+import com.gt22.gt22core.integration.thaumcraft.item.FocusBase;
 
 public class NatureFocus extends FocusBase {
 	
@@ -42,7 +42,7 @@ public class NatureFocus extends FocusBase {
 	
 	
 	public NatureFocus() {
-		super("NatureFocus");
+		super("NatureFocus", Core.instance);
 	}
 
 	@Override

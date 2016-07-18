@@ -1,6 +1,7 @@
 package com.gt22.elementalmagic.proxy;
 
-import com.gt22.elementalmagic.blocks.MetalBlock;
+import net.minecraftforge.common.config.Configuration;
+import com.gt22.elementalmagic.config.CfgValues;
 import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.gui.GuiHandler;
 import com.gt22.elementalmagic.registry.ArcaneRecipeRegistry;
@@ -11,7 +12,7 @@ import com.gt22.elementalmagic.registry.ItemRegistry;
 import com.gt22.elementalmagic.registry.ResearchRegistry;
 import com.gt22.elementalmagic.registry.TileRegistry;
 import com.gt22.elementalmagic.registry.WandAndCapsRegistry;
-
+import com.gt22.elementalmagic.upgrades.Upgrades;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -21,6 +22,8 @@ public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent e)
 	{
+		CfgValues.init(new Configuration(e.getModConfigurationDirectory()));
+		Upgrades.init();
 		ItemRegistry.init();
 		BlockRegistry.init();
 		WandAndCapsRegistry.init();
@@ -29,7 +32,7 @@ public class CommonProxy {
 	
 	public void init(FMLInitializationEvent e)
 	{
-		MetalBlock.registerMetalBlocksRecipes();
+		BlockRegistry.metalBlocks.registerMetalBlocksRecipes();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Core.instance, new GuiHandler());
 	}
 	
@@ -40,8 +43,5 @@ public class CommonProxy {
 		CrucibleRecipeRegistry.init();
 		ResearchRegistry.init();
 	}
-	
-	
-	
 
 }

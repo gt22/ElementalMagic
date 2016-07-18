@@ -1,23 +1,21 @@
 package com.gt22.elementalmagic.gui.container;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import thaumcraft.api.ItemApi;
 
 import com.gt22.elementalmagic.gui.slot.ShardSlot;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
+import com.gt22.gt22core.baseclasses.container.ContainerWithPlayerInv;
 
 public class HolderContainer extends ContainerWithPlayerInv {
 	
 	 private TileShardHolder te;
 	 
 	    public HolderContainer(IInventory playerInv, TileShardHolder te) {
-	        super(playerInv);
+	        super(playerInv, new Slot[] {new ShardSlot(te, 0, 80, 24)});
 	    	this.te = te;
-	        this.addSlotToContainer(new ShardSlot(te, 0, 80, 24));
 	    }
 	    
 	    

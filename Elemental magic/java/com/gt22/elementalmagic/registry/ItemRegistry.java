@@ -5,10 +5,11 @@ package com.gt22.elementalmagic.registry;
 
 import net.minecraft.item.Item;
 
+import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.items.BoundMatrix;
-import com.gt22.elementalmagic.items.CraftItem;
 import com.gt22.elementalmagic.items.ElementalCap;
 import com.gt22.elementalmagic.items.ElementalRod;
+import com.gt22.elementalmagic.items.baubles.ElementalCharm;
 import com.gt22.elementalmagic.items.foci.CurrentFocus;
 import com.gt22.elementalmagic.items.foci.EmberFocus;
 import com.gt22.elementalmagic.items.foci.NatureFocus;
@@ -18,6 +19,7 @@ import com.gt22.elementalmagic.items.tools.ElemHoe;
 import com.gt22.elementalmagic.items.tools.ElemPick;
 import com.gt22.elementalmagic.items.tools.ElemShovel;
 import com.gt22.elementalmagic.items.tools.ElemSword;
+import com.gt22.gt22core.baseclasses.item.GenericItem;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -27,7 +29,7 @@ public class ItemRegistry {
 	public static Item emberFocus;
 	public static Item currentFocus;
 	public static Item natureFocus;
-	public static CraftItem craftItem;
+	public static GenericItem craftItem;
 	public static Item elemRod;
 	public static Item elemCap;
 	public static Item elemPick;
@@ -36,6 +38,7 @@ public class ItemRegistry {
 	public static Item elemShovel;
 	public static Item elemHoe;
 	public static Item boundMatrix;
+	public static Item elemCharms;
 	public static void register(Item item)
 	{
 		GameRegistry.registerItem(item, item.getUnlocalizedName());
@@ -47,10 +50,10 @@ public class ItemRegistry {
 		register(emberFocus = new EmberFocus());
 		register(currentFocus = new CurrentFocus());
 		register(natureFocus = new NatureFocus());
-		craftItem = new CraftItem();
-		craftItem.addCraftItem("InertFocus");
-		craftItem.addCraftItem("ElementalIngot");
-		craftItem.addCraftItem("ElementalShard");
+		craftItem = new GenericItem(Core.instance);
+		craftItem.addGenericItem("InertFocus");
+		craftItem.addGenericItem("ElementalIngot");
+		craftItem.addGenericItem("ElementalShard");
 		register(craftItem);
 		register(elemRod = new ElementalRod());
 		register(elemCap = new ElementalCap());
@@ -60,6 +63,7 @@ public class ItemRegistry {
 		register(elemSword = new ElemSword("ElementalSword"));
 		register(elemHoe = new ElemHoe("ElementalHoe"));
 		register(boundMatrix = new BoundMatrix());
+		register(elemCharms = new ElementalCharm());
 	}
 	
 }
