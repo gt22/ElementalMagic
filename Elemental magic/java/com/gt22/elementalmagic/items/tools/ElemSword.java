@@ -21,7 +21,7 @@ public class ElemSword extends ItemSword {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World worldObj, EntityPlayer player) {
 		player.addPotionEffect(new PotionEffect(5, 200, 0));
-		stack.damageItem(5, player);
+		stack.damageItem(15, player);
 		return stack;
 	}
 

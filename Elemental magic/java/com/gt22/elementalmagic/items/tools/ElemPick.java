@@ -21,7 +21,7 @@ public class ElemPick extends ItemPickaxe {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World worldObj, EntityPlayer player) {
 		player.addPotionEffect(new PotionEffect(3, 200, 1));
-		stack.damageItem(5, player);
+		stack.damageItem(15, player);
 		return stack;
 	}
 

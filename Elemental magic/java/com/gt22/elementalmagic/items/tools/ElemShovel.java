@@ -70,7 +70,7 @@ public class ElemShovel extends ItemSpade {
 		              md = world.getBlockMetadata(x + xx, y + yy, z + zz);
 		              if ((bl.getBlockHardness(world, x + xx, y + yy, z + zz) >= 0.0F) && ((ForgeHooks.isToolEffective(stack, bl, md))))
 		              {
-		                stack.damageItem(1, player);
+		                stack.damageItem(5, player);
 		                ArrayList<ItemStack> drops = world.getBlock(x + xx, y + yy, z + zz).getDrops(world, x + xx, y + yy, z + zz, world.getBlockMetadata(x + xx, y + yy, z + zz), 0);
 		                world.setBlockToAir(x + xx, y + yy, z + zz);
 		                ret = true;

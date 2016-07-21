@@ -1,23 +1,20 @@
 package com.gt22.elementalmagic.blocks;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
 import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.gui.GuiHandler;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
+import com.gt22.gt22core.baseclasses.block.BlockWithTile;
+import com.gt22.gt22core.utils.ToolClass;
 
-public class ShardHolder extends BlockContainer {
+public class ShardHolder extends BlockWithTile {
 
 	public ShardHolder(String unlocName) {
-		super(Material.rock);
-		setBlockName(unlocName);
-		setCreativeTab(Core.tab);
-		setBlockTextureName(Core.modid + ":" + unlocName);
+		super(Material.iron, 5F, 5F, unlocName, Core.instance, ToolClass.pickaxe, 2, TileShardHolder.class);
 		setBlockBounds(0.25F, 0F, 0.25F, 0.75F, 1F, 0.75F);
 	}
 

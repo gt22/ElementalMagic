@@ -1,6 +1,5 @@
 package com.gt22.elementalmagic.blocks;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,21 +7,19 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
 import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.gui.GuiHandler;
 import com.gt22.elementalmagic.tiles.TileAutoDecompTable;
+import com.gt22.gt22core.baseclasses.block.BlockWithTile;
+import com.gt22.gt22core.utils.ToolClass;
 
-public class AutoDecompTable extends BlockContainer
+public class AutoDecompTable extends BlockWithTile
 {
 
 	private static IIcon[] icons = new IIcon[2];
 	public AutoDecompTable(String unlocName)
 	{
-		super(Material.wood);
-		setBlockName(unlocName);
-		setBlockTextureName(Core.modid + ":" + unlocName);
-		setCreativeTab(Core.tab);
+		super(Material.iron, 7F, 7F, unlocName, Core.instance, ToolClass.pickaxe, 2, TileAutoDecompTable.class);
 	}
 
 	@Override

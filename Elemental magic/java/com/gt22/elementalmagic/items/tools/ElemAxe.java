@@ -32,7 +32,7 @@ public class ElemAxe extends ItemAxe {
 		      {
 		        AdvThaumApi.breakFurthestBlock(worldObj, x, y, z, bi, player, true, 10);
 		      }
-		      stack.damageItem(5, player);
+		      stack.damageItem(15, player);
 		      return true;
 		}
 		return false;

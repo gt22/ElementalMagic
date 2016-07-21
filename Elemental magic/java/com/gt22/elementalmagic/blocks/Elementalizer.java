@@ -1,26 +1,23 @@
 package com.gt22.elementalmagic.blocks;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
 import com.gt22.elementalmagic.core.Core;
 import com.gt22.elementalmagic.gui.GuiHandler;
 import com.gt22.elementalmagic.tiles.TileElementalizer;
 import com.gt22.elementalmagic.tiles.TileShardHolder;
+import com.gt22.gt22core.baseclasses.block.BlockWithTile;
+import com.gt22.gt22core.utils.ToolClass;
 
-public class Elementalizer extends BlockContainer
+public class Elementalizer extends BlockWithTile
 {
 	
 	public Elementalizer(String unlocName) {
-		super(Material.iron);
-		setBlockName(unlocName);
-		setBlockTextureName(Core.modid + ":" + unlocName);
-		setCreativeTab(Core.tab);
+		super(Material.iron, 7F, 7F, unlocName, Core.instance, ToolClass.pickaxe, 2, TileElementalizer.class);
 	}
 
 	@Override
