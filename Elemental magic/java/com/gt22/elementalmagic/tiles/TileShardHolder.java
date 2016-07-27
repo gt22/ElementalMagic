@@ -16,31 +16,13 @@ import com.gt22.gt22core.baseclasses.tileEntity.TileWithInventory;
 public class TileShardHolder extends TileWithInventory {
 	
 	public TileShardHolder() {
-		super(1);
+		super(1, true);
 	}
 	
 	public int drawVis(Aspect aspect, int amount)
 	{
 		return VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, aspect, amount);
 	}
-	
-	
-	 @Override
-	 public Packet getDescriptionPacket()
-	 {
-		 NBTTagCompound syncData = new NBTTagCompound();
-		 this.writeToNBT(syncData);
-	     return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, syncData);
-	 }
-	
-
-
-
-	@Override
-	 public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
-	 {
-	     readFromNBT(pkt.func_148857_g());
-	 }
 	
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
