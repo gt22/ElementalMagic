@@ -24,7 +24,6 @@ public class TileShardHolder extends TileWithInventory {
 		return VisNetHandler.drainVis(worldObj, xCoord, yCoord, zCoord, aspect, amount);
 	}
 	
-	public int resettime = 20;
 	
 	 @Override
 	 public Packet getDescriptionPacket()
